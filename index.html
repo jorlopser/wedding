@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Boda Test 💍</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Georgia', serif;
+      background-color: #fdf8f4;
+      color: #4a3f35;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .lang-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      gap: 8px;
+    }
+
+    .lang-btn {
+      background: white;
+      border: 1px solid #c9a96e;
+      color: #c9a96e;
+      padding: 6px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 13px;
+      transition: all 0.2s;
+    }
+
+    .lang-btn.active, .lang-btn:hover {
+      background: #c9a96e;
+      color: white;
+    }
+
+    .rings {
+      font-size: 60px;
+      margin-bottom: 20px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    h1 {
+      font-size: 48px;
+      color: #c9a96e;
+      margin-bottom: 10px;
+      letter-spacing: 2px;
+    }
+
+    .subtitle {
+      font-size: 18px;
+      color: #9b8b7a;
+      margin-bottom: 40px;
+      font-style: italic;
+    }
+
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 40px 50px;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.08);
+      max-width: 500px;
+      width: 100%;
+    }
+
+    .card h2 {
+      font-size: 22px;
+      color: #c9a96e;
+      margin-bottom: 16px;
+    }
+
+    .card p {
+      font-size: 16px;
+      line-height: 1.8;
+      color: #6b5c50;
+    }
+
+    .divider {
+      margin: 20px auto;
+      width: 60px;
+      height: 1px;
+      background: #c9a96e;
+    }
+
+    .footer {
+      margin-top: 40px;
+      font-size: 13px;
+      color: #bbb;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Language Toggle -->
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('ca')">CAT</button>
+    <button class="lang-btn" onclick="setLang('es')">ESP</button>
+    <button class="lang-btn" onclick="setLang('en')">ENG</button>
+  </div>
+
+  <!-- Content -->
+  <div class="rings">💍</div>
+
+  <h1 id="names">Noms & Cognoms</h1>
+
+  <p class="subtitle" id="subtitle">Us donem la benvinguda a la nostra boda</p>
+
+  <div class="card">
+    <h2 id="card-title">📅 La nostra data</h2>
+    <div class="divider"></div>
+    <p id="card-body">
+      Aviat compartirem tots els detalls amb vosaltres.<br/>
+      Aquesta és una pàgina de prova per verificar que la web funciona correctament.
+    </p>
+  </div>
+
+  <p class="footer" id="footer">Pàgina de prova · JKT Wedding</p>
+
+  <script>
+    const translations = {
+      ca: {
+        names: "Noms & Cognoms",
+        subtitle: "Us donem la benvinguda a la nostra boda",
+        cardTitle: "📅 La nostra data",
+        cardBody: "Aviat compartirem tots els detalls amb vosaltres.<br/>Aquesta és una pàgina de prova per verificar que la web funciona correctament.",
+        footer: "Pàgina de prova · JKT Wedding"
+      },
+      es: {
+        names: "Nombres & Apellidos",
+        subtitle: "Os damos la bienvenida a nuestra boda",
+        cardTitle: "📅 Nuestra fecha",
+        cardBody: "Pronto compartiremos todos los detalles con vosotros.<br/>Esta es una página de prueba para verificar que la web funciona correctamente.",
+        footer: "Página de prueba · JKT Wedding"
+      },
+      en: {
+        names: "Names & Surnames",
+        subtitle: "Welcome to our wedding",
+        cardTitle: "📅 Our date",
+        cardBody: "We will soon share all the details with you.<br/>This is a test page to verify that the website is working correctly.",
+        footer: "Test page · JKT Wedding"
+      }
+    };
+
+    function setLang(lang) {
+      const t = translations[lang];
+      document.getElementById('names').textContent = t.names;
+      document.getElementById('subtitle').textContent = t.subtitle;
+      document.getElementById('card-title').textContent = t.cardTitle;
+      document.getElementById('card-body').innerHTML = t.cardBody;
+      document.getElementById('footer').textContent = t.footer;
+
+      document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+    }
+  </script>
+
+</body>
+</html>
