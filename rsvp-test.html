@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RSVP Test 💍</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Georgia', serif;
+      background-color: #fdf8f4;
+      color: #4a3f35;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    /* Language Toggle */
+    .lang-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      gap: 8px;
+      z-index: 100;
+    }
+
+    .lang-btn {
+      background: white;
+      border: 1px solid #c9a96e;
+      color: #c9a96e;
+      padding: 6px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 13px;
+      transition: all 0.2s;
+    }
+
+    .lang-btn.active, .lang-btn:hover {
+      background: #c9a96e;
+      color: white;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .rings {
+      font-size: 50px;
+      margin-bottom: 16px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .header h1 {
+      font-size: 36px;
+      color: #c9a96e;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+
+    .header p {
+      font-size: 16px;
+      color: #9b8b7a;
+      font-style: italic;
+    }
+
+    .divider {
+      width: 60px;
+      height: 1px;
+      background: #c9a96e;
+      margin: 16px auto;
+    }
+
+    /* Card */
+    .card {
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.08);
+      width: 100%;
+      max-width: 700px;
+    }
+
+    .card h2 {
+      font-size: 22px;
+      color: #c9a96e;
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .card .card-subtitle {
+      text-align: center;
+      color: #9b8b7a;
+      font-size: 14px;
+      font-style: italic;
+      margin-bottom: 24px;
+    }
+
+    /* iframe wrapper */
+    .iframe-wrapper {
+      width: 100%;
+      overflow: hidden;
+      border-radius: 12px;
+    }
+
+    .iframe-wrapper iframe {
+      width: 100%;
+      height: 520px;
+      border: none;
+      border-radius: 12px;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 40px;
+      font-size: 13px;
+      color: #bbb;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Language Toggle -->
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('ca')">CAT</button>
+    <button class="lang-btn" onclick="setLang('es')">ESP</button>
+    <button class="lang-btn" onclick="setLang('en')">ENG</button>
+  </div>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="rings">💍</div>
+    <h1 id="title">Confirmació d'assistència</h1>
+    <div class="divider"></div>
+    <p id="subtitle">Fes-nos saber si podràs acompanyar-nos en aquest dia tan especial</p>
+  </div>
+
+  <!-- RSVP Card -->
+  <div class="card">
+    <h2 id="card-title">📋 RSVP</h2>
+    <p class="card-subtitle" id="card-subtitle">Omple el formulari abans de la data límit</p>
+
+    <div class="iframe-wrapper">
+      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSd1CaeR8VTK2XGhEEGWhsa6LUHwNjGPivnuRttkg7bMPCC6kQ/viewform?embedded=true"
+        frameborder="0" marginheight="0" marginwidth="0">
+        Cargando…
+      </iframe>
+    </div>
+  </div>
+
+  <p class="footer" id="footer">Pàgina de prova · JKT Wedding</p>
+
+  <script>
+    const translations = {
+      ca: {
+        title: "Confirmació d'assistència",
+        subtitle: "Fes-nos saber si podràs acompanyar-nos en aquest dia tan especial",
+        cardTitle: "📋 RSVP",
+        cardSubtitle: "Omple el formulari abans de la data límit",
+        footer: "Pàgina de prova · JKT Wedding"
+      },
+      es: {
+        title: "Confirmación de asistencia",
+        subtitle: "Haznos saber si podrás acompañarnos en este día tan especial",
+        cardTitle: "📋 RSVP",
+        cardSubtitle: "Rellena el formulario antes de la fecha límite",
+        footer: "Página de prueba · JKT Wedding"
+      },
+      en: {
+        title: "RSVP Confirmation",
+        subtitle: "Let us know if you'll be able to join us on this special day",
+        cardTitle: "📋 RSVP",
+        cardSubtitle: "Please fill in the form before the deadline",
+        footer: "Test page · JKT Wedding"
+      }
+    };
+
+    function setLang(lang) {
+      const t = translations[lang];
+      document.getElementById('title').textContent = t.title;
+      document.getElementById('subtitle').textContent = t.subtitle;
+      document.getElementById('card-title').textContent = t.cardTitle;
+      document.getElementById('card-subtitle').textContent = t.cardSubtitle;
+      document.getElementById('footer').textContent = t.footer;
+
+      document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+    }
+  </script>
+
+</body>
+</html>
