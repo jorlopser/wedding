@@ -1,0 +1,1777 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jordi & Caterina — 25.09.2027</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <style>
+
+    /* ============================================================
+       DESIGN SYSTEM — Colors, Fonts, Base
+    ============================================================ */
+    :root {
+      --stone-light:   #C8B89A;
+      --stone-dark:    #8B7355;
+      --stone-darker:  #5C4D3C;
+      --cream:         #FAF7F2;
+      --cream-dark:    #F0EAE0;
+      --sage:          #A8B5A0;
+      --gold:          #C9A96E;
+      --gold-light:    #E8D5B0;
+      --white:         #FFFFFF;
+      --text-main:     #4a3f35;
+      --text-soft:     #7a6a5a;
+      --text-lighter:  #9b8b7a;
+
+      --font-serif:    'Cormorant Garamond', Georgia, serif;
+      --font-sans:     'Montserrat', sans-serif;
+
+      --radius:        16px;
+      --shadow:        0 4px 30px rgba(0,0,0,0.08);
+      --transition:    all 0.3s ease;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--cream);
+      color: var(--text-main);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* ============================================================
+       LANGUAGE TOGGLE
+    ============================================================ */
+    .lang-toggle {
+      position: fixed;
+      top: 20px;
+      right: 24px;
+      display: flex;
+      gap: 6px;
+      z-index: 1000;
+    }
+
+    .lang-btn {
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      padding: 5px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      transition: var(--transition);
+    }
+
+    .lang-btn.active,
+    .lang-btn:hover {
+      background: var(--gold);
+      color: var(--white);
+    }
+
+    /* ============================================================
+       NAVIGATION
+    ============================================================ */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 999;
+      background: rgba(250, 247, 242, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--gold-light);
+      padding: 0 40px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      font-weight: 300;
+      color: var(--stone-dark);
+      letter-spacing: 2px;
+      text-decoration: none;
+    }
+
+    .nav-logo span {
+      color: var(--gold);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-soft);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover {
+      color: var(--gold);
+    }
+
+    /* Mobile nav */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 1.5px;
+      background: var(--stone-dark);
+      transition: var(--transition);
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 64px;
+      left: 0;
+      right: 0;
+      background: var(--cream);
+      border-bottom: 1px solid var(--gold-light);
+      padding: 20px 40px;
+      z-index: 998;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .mobile-menu.open {
+      display: flex;
+    }
+
+    .mobile-menu a {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-soft);
+      text-decoration: none;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--cream-dark);
+    }
+
+    /* ============================================================
+       SECTIONS — General
+    ============================================================ */
+    section {
+      padding: 100px 40px;
+    }
+
+    .section-inner {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: var(--font-sans);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: 42px;
+      font-weight: 300;
+      color: var(--stone-darker);
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .section-subtitle {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--text-lighter);
+      margin-bottom: 40px;
+    }
+
+    .divider {
+      width: 60px;
+      height: 1px;
+      background: var(--gold);
+      margin: 20px 0;
+    }
+
+    .divider.center {
+      margin: 20px auto;
+    }
+
+    /* ============================================================
+       CARDS
+    ============================================================ */
+    .card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 40px;
+      box-shadow: var(--shadow);
+    }
+
+    /* ============================================================
+       BUTTONS
+    ============================================================ */
+    .btn {
+      display: inline-block;
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 14px 32px;
+      border-radius: 40px;
+      transition: var(--transition);
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--white);
+    }
+
+    .btn-primary:hover {
+      background: var(--stone-dark);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--gold);
+      border: 1px solid var(--gold);
+    }
+
+    .btn-outline:hover {
+      background: var(--gold);
+      color: var(--white);
+    }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    footer {
+      background: var(--stone-darker);
+      color: var(--cream-dark);
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    footer .footer-names {
+      font-family: var(--font-serif);
+      font-size: 28px;
+      font-weight: 300;
+      letter-spacing: 3px;
+      color: var(--gold-light);
+      margin-bottom: 8px;
+    }
+
+    footer .footer-date {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--stone-light);
+      margin-bottom: 20px;
+    }
+
+    footer .footer-copy {
+      font-size: 11px;
+      color: var(--stone-light);
+      opacity: 0.6;
+    }
+
+    /* ============================================================
+       PORTADA — Hero + Countdown
+    ============================================================ */
+    #portada {
+      min-height: 100vh;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      background: var(--cream-dark);
+    }
+
+    /* Floral decoration top */
+    #portada::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      left: -60px;
+      width: 320px;
+      height: 320px;
+      background: radial-gradient(circle, rgba(168,181,160,0.18) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    #portada::after {
+      content: '';
+      position: absolute;
+      bottom: -60px;
+      right: -60px;
+      width: 280px;
+      height: 280px;
+      background: radial-gradient(circle, rgba(201,169,110,0.12) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 120px 40px 60px;
+      max-width: 700px;
+    }
+
+    .hero-floral {
+      font-size: 32px;
+      letter-spacing: 8px;
+      color: var(--sage);
+      margin-bottom: 24px;
+      opacity: 0.8;
+    }
+
+    .hero-label {
+      font-family: var(--font-sans);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    .hero-names {
+      font-family: var(--font-serif);
+      font-size: 72px;
+      font-weight: 300;
+      color: var(--stone-darker);
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+
+    .hero-names .ampersand {
+      color: var(--gold);
+      font-style: italic;
+      font-size: 80px;
+    }
+
+    .hero-date {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--text-lighter);
+      margin: 20px 0 8px;
+    }
+
+    .hero-location {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      font-style: italic;
+      color: var(--stone-dark);
+      margin-bottom: 40px;
+    }
+
+    .hero-divider {
+      width: 80px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      margin: 0 auto 48px;
+    }
+
+    /* Countdown */
+    .countdown {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+
+    .countdown-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: var(--white);
+      border-radius: 12px;
+      padding: 20px 24px;
+      box-shadow: var(--shadow);
+      min-width: 80px;
+    }
+
+    .countdown-number {
+      font-family: var(--font-serif);
+      font-size: 44px;
+      font-weight: 300;
+      color: var(--stone-darker);
+      line-height: 1;
+    }
+
+    .countdown-label {
+      font-family: var(--font-sans);
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-top: 6px;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* Scroll indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-lighter);
+      font-family: var(--font-sans);
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      animation: bounce 2s ease-in-out infinite;
+    }
+
+    .scroll-indicator::after {
+      content: '↓';
+      font-size: 16px;
+      color: var(--gold);
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(6px); }
+    }
+
+    @media (max-width: 768px) {
+      .hero-names {
+        font-size: 48px;
+      }
+      .hero-names .ampersand {
+        font-size: 54px;
+      }
+      .countdown-number {
+        font-size: 32px;
+      }
+      .countdown-item {
+        padding: 16px 18px;
+        min-width: 64px;
+      }
+    }
+
+    /* ============================================================
+       AGENDA
+    ============================================================ */
+    #agenda {
+      background: var(--white);
+    }
+
+    .agenda-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 40px;
+    }
+
+    .agenda-block {
+      background: var(--cream);
+      border-radius: var(--radius);
+      padding: 32px;
+      border-left: 3px solid var(--gold);
+    }
+
+    .agenda-block-title {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--stone-darker);
+      margin-bottom: 4px;
+    }
+
+    .agenda-block-place {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+
+    .agenda-timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .agenda-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .agenda-time {
+      font-family: var(--font-serif);
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--gold);
+      min-width: 52px;
+      padding-top: 1px;
+    }
+
+    .agenda-desc {
+      font-family: var(--font-sans);
+      font-size: 13px;
+      color: var(--text-soft);
+      line-height: 1.5;
+    }
+
+    .agenda-desc strong {
+      display: block;
+      color: var(--text-main);
+      font-weight: 500;
+      margin-bottom: 2px;
+    }
+
+    .agenda-address {
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid var(--gold-light);
+      font-family: var(--font-sans);
+      font-size: 12px;
+      color: var(--text-lighter);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    @media (max-width: 768px) {
+      .agenda-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ============================================================
+       HISTORIA
+    ============================================================ */
+    #historia {
+      background: var(--cream);
+    }
+
+    .historia-timeline {
+      position: relative;
+      margin-top: 48px;
+      padding-left: 32px;
+    }
+
+    .historia-timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      bottom: 8px;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, var(--gold), var(--gold), transparent);
+    }
+
+    .historia-item {
+      position: relative;
+      margin-bottom: 48px;
+    }
+
+    .historia-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .historia-item::before {
+      content: '';
+      position: absolute;
+      left: -36px;
+      top: 8px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--gold);
+      border: 2px solid var(--cream);
+      box-shadow: 0 0 0 2px var(--gold);
+    }
+
+    .historia-year {
+      font-family: var(--font-sans);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+
+    .historia-title-item {
+      font-family: var(--font-serif);
+      font-size: 24px;
+      font-weight: 400;
+      color: var(--stone-darker);
+      margin-bottom: 8px;
+    }
+
+    .historia-text {
+      font-family: var(--font-serif);
+      font-size: 17px;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--text-soft);
+      line-height: 1.8;
+    }
+
+    .historia-emoji {
+      font-size: 28px;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    /* ============================================================
+       MAPA
+    ============================================================ */
+    #mapa {
+      background: var(--white);
+    }
+
+    .mapa-intro {
+      font-family: var(--font-serif);
+      font-size: 17px;
+      font-style: italic;
+      color: var(--text-soft);
+      margin-bottom: 40px;
+      line-height: 1.8;
+    }
+
+    .mapa-pins-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .mapa-pin-tag {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--cream);
+      border-radius: 24px;
+      padding: 6px 14px;
+      font-family: var(--font-sans);
+      font-size: 12px;
+      color: var(--text-soft);
+      font-weight: 500;
+    }
+
+    .mapa-pin-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    #map {
+      width: 100%;
+      height: 480px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      z-index: 1;
+    }
+
+    /* Leaflet popup custom style */
+    .leaflet-popup-content-wrapper {
+      border-radius: 12px !important;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.12) !important;
+      font-family: 'Montserrat', sans-serif !important;
+    }
+
+    .leaflet-popup-content {
+      margin: 14px 18px !important;
+    }
+
+    .popup-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: #5C4D3C;
+      margin-bottom: 4px;
+    }
+
+    .popup-sub {
+      font-size: 12px;
+      color: #9b8b7a;
+      margin-bottom: 6px;
+    }
+
+    .popup-link {
+      font-size: 11px;
+      color: #C9A96E;
+      text-decoration: none;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    .popup-link:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      #map { height: 360px; }
+    }
+
+    /* ============================================================
+       DRESS CODE
+    ============================================================ */
+    #dresscode {
+      background: var(--cream);
+    }
+
+    .dresscode-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 40px;
+    }
+
+    .dresscode-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 32px 24px;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+
+    .dresscode-icon {
+      font-size: 40px;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .dresscode-card h3 {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--stone-darker);
+      margin-bottom: 8px;
+    }
+
+    .dresscode-card p {
+      font-family: var(--font-sans);
+      font-size: 13px;
+      color: var(--text-soft);
+      line-height: 1.6;
+    }
+
+    .dresscode-avoid {
+      margin-top: 32px;
+      background: var(--cream-dark);
+      border-radius: var(--radius);
+      padding: 24px 32px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .dresscode-avoid-icon {
+      font-size: 28px;
+      flex-shrink: 0;
+    }
+
+    .dresscode-avoid p {
+      font-family: var(--font-sans);
+      font-size: 13px;
+      color: var(--text-soft);
+      line-height: 1.6;
+    }
+
+    .dresscode-avoid strong {
+      color: var(--text-main);
+      font-weight: 500;
+    }
+
+    @media (max-width: 768px) {
+      .dresscode-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ============================================================
+       ALOJAMIENTO
+    ============================================================ */
+    #alojamiento {
+      background: var(--white);
+    }
+
+    .aloj-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-top: 40px;
+    }
+
+    .aloj-block h3 {
+      font-family: var(--font-serif);
+      font-size: 24px;
+      font-weight: 400;
+      color: var(--stone-darker);
+      margin-bottom: 4px;
+    }
+
+    .aloj-block-label {
+      font-family: var(--font-sans);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .aloj-item {
+      background: var(--cream);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 12px;
+    }
+
+    .aloj-item-name {
+      font-family: var(--font-serif);
+      font-size: 17px;
+      font-weight: 400;
+      color: var(--stone-darker);
+      margin-bottom: 4px;
+    }
+
+    .aloj-item-desc {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      color: var(--text-lighter);
+    }
+
+    @media (max-width: 768px) {
+      .aloj-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ============================================================
+       FAQs
+    ============================================================ */
+    #faqs {
+      background: var(--cream-dark);
+    }
+
+    .faq-list {
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .faq-item {
+      background: var(--white);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    }
+
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 20px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      text-align: left;
+      gap: 16px;
+    }
+
+    .faq-question-text {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--stone-darker);
+    }
+
+    .faq-icon {
+      font-size: 20px;
+      color: var(--gold);
+      flex-shrink: 0;
+      transition: var(--transition);
+      font-style: normal;
+    }
+
+    .faq-item.open .faq-icon {
+      transform: rotate(45deg);
+    }
+
+    .faq-answer {
+      display: none;
+      padding: 0 24px 20px;
+      font-family: var(--font-sans);
+      font-size: 14px;
+      color: var(--text-soft);
+      line-height: 1.7;
+      border-top: 1px solid var(--cream-dark);
+      padding-top: 16px;
+    }
+
+    .faq-item.open .faq-answer {
+      display: block;
+    }
+
+    /* ============================================================
+       PLACEHOLDER SECTIONS (temp content)
+    ============================================================ */
+    .placeholder-box {
+      background: var(--cream-dark);
+      border: 2px dashed var(--gold-light);
+      border-radius: var(--radius);
+      padding: 60px 40px;
+      text-align: center;
+      color: var(--text-lighter);
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 18px;
+    }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 768px) {
+      nav {
+        padding: 0 20px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .nav-hamburger {
+        display: flex;
+      }
+
+      section {
+        padding: 80px 20px;
+      }
+
+      .section-title {
+        font-size: 32px;
+      }
+
+      .lang-toggle {
+        top: 74px;
+        right: 16px;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       LANGUAGE TOGGLE
+  ============================================================ -->
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('ca')">CAT</button>
+    <button class="lang-btn" onclick="setLang('es')">ESP</button>
+    <button class="lang-btn" onclick="setLang('en')">ENG</button>
+  </div>
+
+  <!-- ============================================================
+       NAVIGATION
+  ============================================================ -->
+  <nav>
+    <a href="#portada" class="nav-logo">J <span>&</span> C</a>
+    <ul class="nav-links">
+      <li><a href="#agenda" data-i18n="nav-agenda">Agenda</a></li>
+      <li><a href="#historia" data-i18n="nav-historia">Història</a></li>
+      <li><a href="#mapa" data-i18n="nav-mapa">Com arribar</a></li>
+      <li><a href="#rsvp" data-i18n="nav-rsvp">RSVP</a></li>
+      <li><a href="#regalos" data-i18n="nav-regalos">Regals</a></li>
+      <li><a href="#dresscode" data-i18n="nav-dresscode">Dress Code</a></li>
+      <li><a href="#alojamiento" data-i18n="nav-alojamiento">Allotjament</a></li>
+      <li><a href="#faqs" data-i18n="nav-faqs">FAQs</a></li>
+    </ul>
+    <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#agenda" data-i18n="nav-agenda" onclick="toggleMenu()">Agenda</a>
+    <a href="#historia" data-i18n="nav-historia" onclick="toggleMenu()">Història</a>
+    <a href="#mapa" data-i18n="nav-mapa" onclick="toggleMenu()">Com arribar</a>
+    <a href="#rsvp" data-i18n="nav-rsvp" onclick="toggleMenu()">RSVP</a>
+    <a href="#regalos" data-i18n="nav-regalos" onclick="toggleMenu()">Regals</a>
+    <a href="#dresscode" data-i18n="nav-dresscode" onclick="toggleMenu()">Dress Code</a>
+    <a href="#alojamiento" data-i18n="nav-alojamiento" onclick="toggleMenu()">Allotjament</a>
+    <a href="#faqs" data-i18n="nav-faqs" onclick="toggleMenu()">FAQs</a>
+  </div>
+
+  <!-- ============================================================
+       PORTADA — Hero + Countdown
+  ============================================================ -->
+  <section id="portada">
+    <div class="hero-inner">
+
+      <div class="hero-floral">✦ ❀ ✦</div>
+
+      <p class="hero-label" data-i18n="hero-label">Us convidem al nostre casament</p>
+
+      <h1 class="hero-names">
+        Jordi<br/>
+        <span class="ampersand">&</span><br/>
+        Caterina
+      </h1>
+
+      <div class="hero-divider"></div>
+
+      <p class="hero-date">25 · Setembre · 2027</p>
+      <p class="hero-location" data-i18n="hero-location">Seu Vella de Lleida &amp; La Boscana</p>
+
+      <!-- Countdown -->
+      <div class="countdown">
+        <div class="countdown-item">
+          <span class="countdown-number" id="cd-days">—</span>
+          <span class="countdown-label" data-i18n="cd-days">Dies</span>
+        </div>
+        <div class="countdown-item">
+          <span class="countdown-number" id="cd-hours">—</span>
+          <span class="countdown-label" data-i18n="cd-hours">Hores</span>
+        </div>
+        <div class="countdown-item">
+          <span class="countdown-number" id="cd-minutes">—</span>
+          <span class="countdown-label" data-i18n="cd-minutes">Minuts</span>
+        </div>
+        <div class="countdown-item">
+          <span class="countdown-number" id="cd-seconds">—</span>
+          <span class="countdown-label" data-i18n="cd-seconds">Segons</span>
+        </div>
+      </div>
+
+      <!-- CTAs -->
+      <div class="hero-cta">
+        <a href="#rsvp" class="btn btn-primary" data-i18n="hero-cta-rsvp">Confirmar assistència</a>
+        <a href="#agenda" class="btn btn-outline" data-i18n="hero-cta-agenda">Veure agenda</a>
+      </div>
+
+    </div>
+
+    <div class="scroll-indicator" data-i18n="scroll-down">Descobreix més</div>
+  </section>
+
+  <!-- ============================================================
+       AGENDA
+  ============================================================ -->
+  <section id="agenda">
+    <div class="section-inner">
+      <p class="section-label" data-i18n="nav-agenda">Agenda</p>
+      <h2 class="section-title" data-i18n="agenda-title">El gran dia</h2>
+      <p class="section-subtitle" data-i18n="agenda-subtitle">25 de setembre de 2027 · Lleida</p>
+      <div class="divider"></div>
+
+      <div class="agenda-grid">
+
+        <!-- Ceremonia -->
+        <div class="agenda-block">
+          <h3 class="agenda-block-title" data-i18n="agenda-ceremonia-title">Cerimònia</h3>
+          <p class="agenda-block-place">Seu Vella de Lleida</p>
+          <div class="agenda-timeline">
+            <div class="agenda-item">
+              <span class="agenda-time">12:00</span>
+              <div class="agenda-desc">
+                <strong data-i18n="agenda-c1-title">Arribada dels convidats</strong>
+                <span data-i18n="agenda-c1-desc">Us esperem a les portes de la Seu Vella</span>
+              </div>
+            </div>
+            <div class="agenda-item">
+              <span class="agenda-time">12:30</span>
+              <div class="agenda-desc">
+                <strong data-i18n="agenda-c2-title">Cerimònia civil</strong>
+                <span data-i18n="agenda-c2-desc">L'enllaç dels nostres cors</span>
+              </div>
+            </div>
+            <div class="agenda-item">
+              <span class="agenda-time">13:30</span>
+              <div class="agenda-desc">
+                <strong data-i18n="agenda-c3-title">Fotos i cava de benvinguda</strong>
+                <span data-i18n="agenda-c3-desc">Moments per recordar</span>
+              </div>
+            </div>
+          </div>
+          <div class="agenda-address">
+            📍 <span data-i18n="agenda-dir-seu">Carrer dels Cavallers, Lleida</span>
+          </div>
+        </div>
+
+        <!-- Banquete -->
+        <div class="agenda-block">
+          <h3 class="agenda-block-title" data-i18n="agenda-banquet-title">Banquet</h3>
+          <p class="agenda-block-place">La Boscana</p>
+          <div class="agenda-timeline">
+            <div class="agenda-item">
+              <span class="agenda-time">15:00</span>
+              <div class="agenda-desc">
+                <strong data-i18n="agenda-b1-title">Còctel i aperitiu</strong>
+                <span data-i18n="agenda-b1-desc">Als jardins de La Boscana</span>
+              </div>
+            </div>
+            <div class="agenda-item">
+              <span class="agenda-time">16:30</span>
+              <div class="agenda-desc">
+                <strong data-i18n="agenda-b2-title">Dinar de noces</strong>
+                <span data-i18n="agenda-b2-desc">Menú degustació amb els nostres éssers estimats</span>
+              </div>
+            </div>
+            <div class="agenda-item">
+              <span class="agenda-time">20:00</span>
+              <div class="agenda-desc">
+                <strong data-i18n="agenda-b3-title">Ball i festa</strong>
+                <span data-i18n="agenda-b3-desc">Que comenci la festa!</span>
+              </div>
+            </div>
+            <div class="agenda-item">
+              <span class="agenda-time">00:00</span>
+              <div class="agenda-desc">
+                <strong data-i18n="agenda-b4-title">Sorpresa de mitjanit</strong>
+                <span data-i18n="agenda-b4-desc">Us tenim una sorpresa preparada 🎆</span>
+              </div>
+            </div>
+          </div>
+          <div class="agenda-address">
+            📍 <span data-i18n="agenda-dir-boscana">Bellvís, Lleida</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       HISTORIA
+  ============================================================ -->
+  <section id="historia">
+    <div class="section-inner">
+      <p class="section-label" data-i18n="nav-historia">Història</p>
+      <h2 class="section-title" data-i18n="historia-title">La nostra història</h2>
+      <p class="section-subtitle" data-i18n="historia-subtitle">Tot gran amor té el seu inici</p>
+      <div class="divider"></div>
+
+      <div class="historia-timeline">
+
+        <div class="historia-item">
+          <span class="historia-emoji">✨</span>
+          <p class="historia-year" data-i18n="historia-y1">El primer encontre</p>
+          <h3 class="historia-title-item" data-i18n="historia-t1">Quan ens vam conèixer</h3>
+          <p class="historia-text" data-i18n="historia-d1">Lorem ipsum — aquí explicareu com us vau conèixer. Podeu explicar el lloc, la situació, i aquella primera impressió que mai oblidareu.</p>
+        </div>
+
+        <div class="historia-item">
+          <span class="historia-emoji">💌</span>
+          <p class="historia-year" data-i18n="historia-y2">El noviatge</p>
+          <h3 class="historia-title-item" data-i18n="historia-t2">Els primers anys junts</h3>
+          <p class="historia-text" data-i18n="historia-d2">Lorem ipsum — aquí podeu explicar els moments més especials de la vostra relació, els viatges, les aventures i tot allò que us ha unit.</p>
+        </div>
+
+        <div class="historia-item">
+          <span class="historia-emoji">💍</span>
+          <p class="historia-year" data-i18n="historia-y3">La petició</p>
+          <h3 class="historia-title-item" data-i18n="historia-t3">El dia que ho va preguntar</h3>
+          <p class="historia-text" data-i18n="historia-d3">Lorem ipsum — aquí explicareu la història de la petició de mà. On va ser, com va ser, i aquell moment màgic que ho va canviar tot.</p>
+        </div>
+
+        <div class="historia-item">
+          <span class="historia-emoji">🎊</span>
+          <p class="historia-year" data-i18n="historia-y4">25 · 09 · 2027</p>
+          <h3 class="historia-title-item" data-i18n="historia-t4">I ara... us convidem a celebrar-ho!</h3>
+          <p class="historia-text" data-i18n="historia-d4">Voleu compartir aquest dia tan especial amb les persones que més estimem. Gràcies per ser part de la nostra història.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       MAPA INTERACTIU
+  ============================================================ -->
+  <section id="mapa">
+    <div class="section-inner">
+      <p class="section-label" data-i18n="nav-mapa">Com arribar</p>
+      <h2 class="section-title" data-i18n="mapa-title">Com arribar</h2>
+      <p class="section-subtitle" data-i18n="mapa-subtitle">Tots els llocs importants del nostre gran dia</p>
+      <div class="divider"></div>
+
+      <p class="mapa-intro" data-i18n="mapa-intro">Tant si veniu de Barcelona, El Masnou o Lleida, aquí teniu tots els punts clau marcats al mapa. Feu clic a cada punt per veure més informació.</p>
+
+      <!-- Legend -->
+      <div class="mapa-pins-legend">
+        <div class="mapa-pin-tag"><div class="mapa-pin-dot" style="background:#C9A96E"></div><span data-i18n="pin-seu">Cerimònia · Seu Vella</span></div>
+        <div class="mapa-pin-tag"><div class="mapa-pin-dot" style="background:#A8B5A0"></div><span data-i18n="pin-boscana">Banquet · La Boscana</span></div>
+        <div class="mapa-pin-tag"><div class="mapa-pin-dot" style="background:#8B7355"></div><span data-i18n="pin-masnou">El Masnou (Jordi)</span></div>
+        <div class="mapa-pin-tag"><div class="mapa-pin-dot" style="background:#C8B89A"></div><span data-i18n="pin-lleida">Lleida (Caterina)</span></div>
+        <div class="mapa-pin-tag"><div class="mapa-pin-dot" style="background:#5C4D3C"></div><span data-i18n="pin-aeroport">Aeroport Barcelona · El Prat</span></div>
+      </div>
+
+      <!-- Map container -->
+      <div id="map"></div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       RSVP PLACEHOLDER
+  ============================================================ -->
+  <section id="rsvp" style="background: var(--cream-dark);">
+    <div class="section-inner">
+      <p class="section-label" data-i18n="nav-rsvp">RSVP</p>
+      <h2 class="section-title" data-i18n="rsvp-title">Confirma la teva assistència</h2>
+      <div class="divider"></div>
+      <div class="placeholder-box">✉️ Formulari RSVP — Fase 5</div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       REGALOS PLACEHOLDER
+  ============================================================ -->
+  <section id="regalos" style="background: var(--white);">
+    <div class="section-inner">
+      <p class="section-label" data-i18n="nav-regalos">Regals</p>
+      <h2 class="section-title" data-i18n="regalos-title">Llista de regals</h2>
+      <div class="divider"></div>
+      <div class="placeholder-box">🎁 Llista de regals Ko-fi — Fase 6</div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       DRESS CODE PLACEHOLDER
+  ============================================================ -->
+  <section id="dresscode" style="background: var(--cream);">
+    <div class="section-inner">
+      <p class="section-label" data-i18n="nav-dresscode">Dress Code</p>
+      <h2 class="section-title" data-i18n="dresscode-title">Dress Code</h2>
+      <div class="divider"></div>
+      <div class="placeholder-box">👗 Dress Code — Fase 7</div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       ALOJAMIENTO PLACEHOLDER
+  ============================================================ -->
+  <section id="alojamiento" style="background: var(--white);">
+    <div class="section-inner">
+      <p class="section-label" data-i18n="nav-alojamiento">Allotjament</p>
+      <h2 class="section-title" data-i18n="alojamiento-title">Allotjament i transport</h2>
+      <div class="divider"></div>
+      <div class="placeholder-box">🏨 Allotjament i transport — Fase 7</div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FAQs PLACEHOLDER
+  ============================================================ -->
+  <section id="faqs" style="background: var(--cream-dark);">
+    <div class="section-inner">
+      <p class="section-label" data-i18n="nav-faqs">FAQs</p>
+      <h2 class="section-title" data-i18n="faqs-title">Preguntes freqüents</h2>
+      <div class="divider"></div>
+      <div class="placeholder-box">❓ FAQs — Fase 7</div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer>
+    <p class="footer-names">Jordi & Caterina</p>
+    <p class="footer-date">25 · 09 · 2027</p>
+    <p class="footer-copy" data-i18n="footer-copy">Fet amb amor 💍</p>
+  </footer>
+
+  <!-- ============================================================
+       JAVASCRIPT — Language System + Nav
+  ============================================================ -->
+  <script>
+    // ── Countdown ─────────────────────────────────────────────
+    const weddingDate = new Date('2027-09-25T12:00:00');
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = weddingDate - now;
+
+      if (diff <= 0) {
+        document.getElementById('cd-days').textContent = '0';
+        document.getElementById('cd-hours').textContent = '0';
+        document.getElementById('cd-minutes').textContent = '0';
+        document.getElementById('cd-seconds').textContent = '0';
+        return;
+      }
+
+      const days    = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours   = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById('cd-days').textContent    = String(days);
+      document.getElementById('cd-hours').textContent   = String(hours).padStart(2, '0');
+      document.getElementById('cd-minutes').textContent = String(minutes).padStart(2, '0');
+      document.getElementById('cd-seconds').textContent = String(seconds).padStart(2, '0');
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    // ── Language System ───────────────────────────────────────
+    const i18n = {
+      ca: {
+        'nav-agenda':        'Agenda',
+        'nav-historia':      'Història',
+        'nav-mapa':          'Com arribar',
+        'nav-rsvp':          'RSVP',
+        'nav-regalos':       'Regals',
+        'nav-dresscode':     'Dress Code',
+        'nav-alojamiento':   'Allotjament',
+        'nav-faqs':          'FAQs',
+        'hero-label':        'Us convidem al nostre casament',
+        'hero-location':     'Seu Vella de Lleida & La Boscana',
+        'cd-days':           'Dies',
+        'cd-hours':          'Hores',
+        'cd-minutes':        'Minuts',
+        'cd-seconds':        'Segons',
+        'hero-cta-rsvp':     'Confirmar assistència',
+        'hero-cta-agenda':   'Veure agenda',
+        'scroll-down':       'Descobreix més',
+        'agenda-title':      'El gran dia',
+        'agenda-subtitle':   '25 de setembre de 2027 · Lleida',
+        'agenda-ceremonia-title': 'Cerimònia',
+        'agenda-banquet-title':   'Banquet',
+        'agenda-c1-title':   'Arribada dels convidats',
+        'agenda-c1-desc':    'Us esperem a les portes de la Seu Vella',
+        'agenda-c2-title':   'Cerimònia civil',
+        'agenda-c2-desc':    "L'enllaç dels nostres cors",
+        'agenda-c3-title':   'Fotos i cava de benvinguda',
+        'agenda-c3-desc':    'Moments per recordar',
+        'agenda-b1-title':   'Còctel i aperitiu',
+        'agenda-b1-desc':    'Als jardins de La Boscana',
+        'agenda-b2-title':   'Dinar de noces',
+        'agenda-b2-desc':    'Menú degustació amb els nostres éssers estimats',
+        'agenda-b3-title':   'Ball i festa',
+        'agenda-b3-desc':    'Que comenci la festa!',
+        'agenda-b4-title':   'Sorpresa de mitjanit',
+        'agenda-b4-desc':    'Us tenim una sorpresa preparada 🎆',
+        'agenda-dir-seu':    'Carrer dels Cavallers, Lleida',
+        'agenda-dir-boscana':'Bellvís, Lleida',
+        'historia-subtitle': 'Tot gran amor té el seu inici',
+        'historia-y1':       'El primer encontre',
+        'historia-t1':       'Quan ens vam conèixer',
+        'historia-d1':       "Lorem ipsum — aquí explicareu com us vau conèixer. Podeu explicar el lloc, la situació, i aquella primera impressió que mai oblidareu.",
+        'historia-y2':       'El noviatge',
+        'historia-t2':       'Els primers anys junts',
+        'historia-d2':       "Lorem ipsum — aquí podeu explicar els moments més especials de la vostra relació, els viatges, les aventures i tot allò que us ha unit.",
+        'historia-y3':       'La petició',
+        'historia-t3':       'El dia que ho va preguntar',
+        'historia-d3':       "Lorem ipsum — aquí explicareu la història de la petició de mà. On va ser, com va ser, i aquell moment màgic que ho va canviar tot.",
+        'historia-y4':       '25 · 09 · 2027',
+        'historia-t4':       'I ara... us convidem a celebrar-ho!',
+        'historia-d4':       "Voleu compartir aquest dia tan especial amb les persones que més estimem. Gràcies per ser part de la nostra història.",
+        'historia-title':    'La nostra història',
+        'mapa-title':        'Com arribar',
+        'mapa-subtitle':     'Tots els llocs importants del nostre gran dia',
+        'mapa-intro':        'Tant si veniu de Barcelona, El Masnou o Lleida, aquí teniu tots els punts clau marcats al mapa. Feu clic a cada punt per veure més informació.',
+        'pin-seu':           'Cerimònia · Seu Vella',
+        'pin-boscana':       'Banquet · La Boscana',
+        'pin-masnou':        'El Masnou (Jordi)',
+        'pin-lleida':        'Lleida (Caterina)',
+        'pin-aeroport':      'Aeroport Barcelona · El Prat',
+        'rsvp-title':        'Confirma la teva assistència',
+        'regalos-title':     'Llista de regals',
+        'dresscode-title':   'Dress Code',
+        'alojamiento-title': 'Allotjament i transport',
+        'faqs-title':        'Preguntes freqüents',
+        'footer-copy':       'Fet amb amor 💍',
+      },
+      es: {
+        'nav-agenda':        'Agenda',
+        'nav-historia':      'Historia',
+        'nav-mapa':          'Cómo llegar',
+        'nav-rsvp':          'RSVP',
+        'nav-regalos':       'Regalos',
+        'nav-dresscode':     'Dress Code',
+        'nav-alojamiento':   'Alojamiento',
+        'nav-faqs':          'FAQs',
+        'hero-label':        'Os invitamos a nuestra boda',
+        'hero-location':     'Seu Vella de Lleida & La Boscana',
+        'cd-days':           'Días',
+        'cd-hours':          'Horas',
+        'cd-minutes':        'Minutos',
+        'cd-seconds':        'Segundos',
+        'hero-cta-rsvp':     'Confirmar asistencia',
+        'hero-cta-agenda':   'Ver agenda',
+        'scroll-down':       'Descubre más',
+        'agenda-title':      'El gran día',
+        'agenda-subtitle':   '25 de septiembre de 2027 · Lleida',
+        'agenda-ceremonia-title': 'Ceremonia',
+        'agenda-banquet-title':   'Banquete',
+        'agenda-c1-title':   'Llegada de los invitados',
+        'agenda-c1-desc':    'Os esperamos en las puertas de la Seu Vella',
+        'agenda-c2-title':   'Ceremonia civil',
+        'agenda-c2-desc':    'La unión de nuestros corazones',
+        'agenda-c3-title':   'Fotos y cava de bienvenida',
+        'agenda-c3-desc':    'Momentos para recordar',
+        'agenda-b1-title':   'Cóctel y aperitivo',
+        'agenda-b1-desc':    'En los jardines de La Boscana',
+        'agenda-b2-title':   'Comida de bodas',
+        'agenda-b2-desc':    'Menú degustación con nuestros seres queridos',
+        'agenda-b3-title':   'Baile y fiesta',
+        'agenda-b3-desc':    '¡Que empiece la fiesta!',
+        'agenda-b4-title':   'Sorpresa de medianoche',
+        'agenda-b4-desc':    'Tenemos una sorpresa preparada 🎆',
+        'agenda-dir-seu':    'Carrer dels Cavallers, Lleida',
+        'agenda-dir-boscana':'Bellvís, Lleida',
+        'historia-subtitle': 'Todo gran amor tiene su inicio',
+        'historia-y1':       'El primer encuentro',
+        'historia-t1':       'Cuando nos conocimos',
+        'historia-d1':       "Lorem ipsum — aquí explicaréis cómo os conocisteis. Podéis contar el lugar, la situación, y esa primera impresión que nunca olvidaréis.",
+        'historia-y2':       'El noviazgo',
+        'historia-t2':       'Los primeros años juntos',
+        'historia-d2':       "Lorem ipsum — aquí podéis explicar los momentos más especiales de vuestra relación, los viajes, las aventuras y todo lo que os ha unido.",
+        'historia-y3':       'La petición',
+        'historia-t3':       'El día que lo preguntó',
+        'historia-d3':       "Lorem ipsum — aquí explicaréis la historia de la pedida de mano. Dónde fue, cómo fue, y ese momento mágico que lo cambió todo.",
+        'historia-y4':       '25 · 09 · 2027',
+        'historia-t4':       '¡Y ahora... os invitamos a celebrarlo!',
+        'historia-d4':       "Queremos compartir este día tan especial con las personas que más queremos. Gracias por ser parte de nuestra historia.",
+        'historia-title':    'Nuestra historia',
+        'mapa-title':        'Cómo llegar',
+        'mapa-subtitle':     'Todos los lugares importantes de nuestro gran día',
+        'mapa-intro':        'Tanto si venís desde Barcelona, El Masnou o Lleida, aquí tenéis todos los puntos clave marcados en el mapa. Haced clic en cada punto para ver más información.',
+        'pin-seu':           'Ceremonia · Seu Vella',
+        'pin-boscana':       'Banquete · La Boscana',
+        'pin-masnou':        'El Masnou (Jordi)',
+        'pin-lleida':        'Lleida (Caterina)',
+        'pin-aeroport':      'Aeropuerto Barcelona · El Prat',
+        'rsvp-title':        'Confirma tu asistencia',
+        'regalos-title':     'Lista de regalos',
+        'dresscode-title':   'Dress Code',
+        'alojamiento-title': 'Alojamiento y transporte',
+        'faqs-title':        'Preguntas frecuentes',
+        'footer-copy':       'Hecho con amor 💍',
+      },
+      en: {
+        'nav-agenda':        'Schedule',
+        'nav-historia':      'Our Story',
+        'nav-mapa':          'Getting There',
+        'nav-rsvp':          'RSVP',
+        'nav-regalos':       'Gifts',
+        'nav-dresscode':     'Dress Code',
+        'nav-alojamiento':   'Accommodation',
+        'nav-faqs':          'FAQs',
+        'hero-label':        'You are invited to our wedding',
+        'hero-location':     'Seu Vella de Lleida & La Boscana',
+        'cd-days':           'Days',
+        'cd-hours':          'Hours',
+        'cd-minutes':        'Minutes',
+        'cd-seconds':        'Seconds',
+        'hero-cta-rsvp':     'Confirm attendance',
+        'hero-cta-agenda':   'View schedule',
+        'scroll-down':       'Discover more',
+        'agenda-title':      'The Big Day',
+        'agenda-subtitle':   'September 25th, 2027 · Lleida',
+        'agenda-ceremonia-title': 'Ceremony',
+        'agenda-banquet-title':   'Reception',
+        'agenda-c1-title':   'Guests arrival',
+        'agenda-c1-desc':    'We will welcome you at the gates of Seu Vella',
+        'agenda-c2-title':   'Civil ceremony',
+        'agenda-c2-desc':    'The union of our hearts',
+        'agenda-c3-title':   'Photos & welcome cava',
+        'agenda-c3-desc':    'Moments to remember',
+        'agenda-b1-title':   'Cocktail & appetizers',
+        'agenda-b1-desc':    'In the gardens of La Boscana',
+        'agenda-b2-title':   'Wedding lunch',
+        'agenda-b2-desc':    'Tasting menu with our loved ones',
+        'agenda-b3-title':   'Dancing & party',
+        'agenda-b3-desc':    'Let the party begin!',
+        'agenda-b4-title':   'Midnight surprise',
+        'agenda-b4-desc':    'We have a surprise ready for you 🎆',
+        'agenda-dir-seu':    'Carrer dels Cavallers, Lleida',
+        'agenda-dir-boscana':'Bellvís, Lleida',
+        'historia-subtitle': 'Every great love has its beginning',
+        'historia-y1':       'The first encounter',
+        'historia-t1':       'When we met',
+        'historia-d1':       "Lorem ipsum — here you will tell how you met. You can share the place, the situation, and that first impression you will never forget.",
+        'historia-y2':       'The relationship',
+        'historia-t2':       'Our first years together',
+        'historia-d2':       "Lorem ipsum — here you can share the most special moments of your relationship, the trips, the adventures and everything that has brought you together.",
+        'historia-y3':       'The proposal',
+        'historia-t3':       'The day he asked',
+        'historia-d3':       "Lorem ipsum — here you will tell the story of the proposal. Where it was, how it happened, and that magical moment that changed everything.",
+        'historia-y4':       '25 · 09 · 2027',
+        'historia-t4':       'And now... we invite you to celebrate!',
+        'historia-d4':       "We want to share this special day with the people we love most. Thank you for being part of our story.",
+        'historia-title':    'Our Story',
+        'mapa-title':        'Getting There',
+        'mapa-subtitle':     'All the important places of our big day',
+        'mapa-intro':        'Whether you are coming from Barcelona, El Masnou or Lleida, here are all the key points marked on the map. Click on each pin to see more information.',
+        'pin-seu':           'Ceremony · Seu Vella',
+        'pin-boscana':       'Reception · La Boscana',
+        'pin-masnou':        'El Masnou (Jordi)',
+        'pin-lleida':        'Lleida (Caterina)',
+        'pin-aeroport':      'Barcelona Airport · El Prat',
+        'rsvp-title':        'Confirm Your Attendance',
+        'regalos-title':     'Gift List',
+        'dresscode-title':   'Dress Code',
+        'alojamiento-title': 'Accommodation & Transport',
+        'faqs-title':        'Frequently Asked Questions',
+        'footer-copy':       'Made with love 💍',
+      }
+    };
+
+    let currentLang = 'ca';
+
+    function setLang(lang) {
+      currentLang = lang;
+      const t = i18n[lang];
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (t[key]) el.textContent = t[key];
+      });
+      document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+      document.documentElement.lang = lang;
+    }
+
+    // ── FAQ Toggle ────────────────────────────────────────────
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item');
+      item.classList.toggle('open');
+    }
+
+    // ── FAQ Toggle ────────────────────────────────────────────
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item');
+      item.classList.toggle('open');
+    }
+
+    // ── Mobile Menu ───────────────────────────────────────────
+    function toggleMenu() {
+      document.getElementById('mobileMenu').classList.toggle('open');
+    }
+
+    // Close mobile menu on outside click
+    document.addEventListener('click', function(e) {
+      const menu = document.getElementById('mobileMenu');
+      const hamburger = document.querySelector('.nav-hamburger');
+      if (!menu.contains(e.target) && !hamburger.contains(e.target)) {
+        menu.classList.remove('open');
+      }
+    });
+  </script>
+
+  <!-- Leaflet JS + Map Init -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    // ── Map ───────────────────────────────────────────────────
+    const map = L.map('map', {
+      center: [41.5, 1.5],
+      zoom: 8,
+      scrollWheelZoom: false
+    });
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      maxZoom: 18
+    }).addTo(map);
+
+    function makeIcon(color) {
+      return L.divIcon({
+        className: '',
+        html: `<div style="
+          width:18px; height:18px;
+          background:${color};
+          border:3px solid white;
+          border-radius:50%;
+          box-shadow:0 2px 8px rgba(0,0,0,0.25);
+        "></div>`,
+        iconSize: [18, 18],
+        iconAnchor: [9, 9],
+        popupAnchor: [0, -12]
+      });
+    }
+
+    const mapPoints = [
+      {
+        lat: 41.6176, lng: 0.6200,
+        color: '#C9A96E',
+        titleKey: 'popup-seu-title',
+        subKey: 'popup-seu-sub',
+        mapsUrl: 'https://maps.google.com/?q=Seu+Vella+Lleida'
+      },
+      {
+        lat: 41.6033, lng: 0.7800,
+        color: '#A8B5A0',
+        titleKey: 'popup-boscana-title',
+        subKey: 'popup-boscana-sub',
+        mapsUrl: 'https://maps.google.com/?q=La+Boscana+Bellvis+Lleida'
+      },
+      {
+        lat: 41.4802, lng: 2.3190,
+        color: '#8B7355',
+        titleKey: 'popup-masnou-title',
+        subKey: 'popup-masnou-sub',
+        mapsUrl: 'https://maps.google.com/?q=El+Masnou+Barcelona'
+      },
+      {
+        lat: 41.6148, lng: 0.6270,
+        color: '#C8B89A',
+        titleKey: 'popup-lleida-title',
+        subKey: 'popup-lleida-sub',
+        mapsUrl: 'https://maps.google.com/?q=Lleida'
+      },
+      {
+        lat: 41.2974, lng: 2.0833,
+        color: '#5C4D3C',
+        titleKey: 'popup-aeroport-title',
+        subKey: 'popup-aeroport-sub',
+        mapsUrl: 'https://maps.google.com/?q=Aeroport+El+Prat+Barcelona'
+      }
+    ];
+
+    const mapTranslations = {
+      ca: {
+        'popup-seu-title':       'Seu Vella de Lleida',
+        'popup-seu-sub':         'Cerimònia · 25 set 2027 · 12:30h',
+        'popup-boscana-title':   'La Boscana',
+        'popup-boscana-sub':     'Banquet · 25 set 2027 · 15:00h',
+        'popup-masnou-title':    'El Masnou',
+        'popup-masnou-sub':      'Poble del nuvi · ~1h de Lleida',
+        'popup-lleida-title':    'Lleida',
+        'popup-lleida-sub':      'Poble de la núvia · Seu Vella',
+        'popup-aeroport-title':  'Aeroport Barcelona · El Prat',
+        'popup-aeroport-sub':    'Aeroport internacional · ~1.5h de Lleida',
+        'popup-maps':            'Obrir a Google Maps'
+      },
+      es: {
+        'popup-seu-title':       'Seu Vella de Lleida',
+        'popup-seu-sub':         'Ceremonia · 25 sep 2027 · 12:30h',
+        'popup-boscana-title':   'La Boscana',
+        'popup-boscana-sub':     'Banquete · 25 sep 2027 · 15:00h',
+        'popup-masnou-title':    'El Masnou',
+        'popup-masnou-sub':      'Pueblo del novio · ~1h de Lleida',
+        'popup-lleida-title':    'Lleida',
+        'popup-lleida-sub':      'Pueblo de la novia · Seu Vella',
+        'popup-aeroport-title':  'Aeropuerto Barcelona · El Prat',
+        'popup-aeroport-sub':    'Aeropuerto internacional · ~1.5h de Lleida',
+        'popup-maps':            'Abrir en Google Maps'
+      },
+      en: {
+        'popup-seu-title':       'Seu Vella de Lleida',
+        'popup-seu-sub':         'Ceremony · Sep 25th 2027 · 12:30',
+        'popup-boscana-title':   'La Boscana',
+        'popup-boscana-sub':     'Reception · Sep 25th 2027 · 15:00',
+        'popup-masnou-title':    'El Masnou',
+        'popup-masnou-sub':      "Groom's hometown · ~1h from Lleida",
+        'popup-lleida-title':    'Lleida',
+        'popup-lleida-sub':      "Bride's hometown · Seu Vella",
+        'popup-aeroport-title':  'Barcelona Airport · El Prat',
+        'popup-aeroport-sub':    'International airport · ~1.5h from Lleida',
+        'popup-maps':            'Open in Google Maps'
+      }
+    };
+
+    let markers = [];
+
+    function buildPopup(point, lang) {
+      const t = mapTranslations[lang];
+      return `
+        <div class="popup-title">${t[point.titleKey]}</div>
+        <div class="popup-sub">${t[point.subKey]}</div>
+        <a class="popup-link" href="${point.mapsUrl}" target="_blank" rel="noopener">
+          → ${t['popup-maps']}
+        </a>
+      `;
+    }
+
+    function initMarkers(lang) {
+      markers.forEach(m => map.removeLayer(m));
+      markers = [];
+      mapPoints.forEach(point => {
+        const marker = L.marker([point.lat, point.lng], { icon: makeIcon(point.color) })
+          .bindPopup(buildPopup(point, lang))
+          .addTo(map);
+        markers.push(marker);
+      });
+    }
+
+    initMarkers('ca');
+
+    // Hook into language switcher to update popups
+    const _origSetLang = setLang;
+    setLang = function(lang) {
+      _origSetLang(lang);
+      initMarkers(lang);
+    };
+  </script>
+
+</body>
+</html>
