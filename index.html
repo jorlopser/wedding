@@ -1575,7 +1575,6 @@
       flex: 1;
       min-width: 200px;
     }
-    /* Modal */
     .contrib-modal-overlay {
       display: none;
       position: fixed;
@@ -1690,6 +1689,129 @@
       color: var(--text-lighter);
       line-height: 1.6;
     }
+
+  
+    /* ============================================================
+       DRESS CODE IMPROVEMENTS
+    ============================================================ */
+    .dresscode-intro {
+      font-family: var(--font-serif);
+      font-size: 17px;
+      font-style: italic;
+      color: var(--text-soft);
+      margin-bottom: 40px;
+      line-height: 1.8;
+      text-align: center;
+    }
+    .dresscode-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+    @media (max-width: 768px) { .dresscode-grid { grid-template-columns: 1fr; } }
+    .dresscode-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 32px 24px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+    .dresscode-card:hover { transform: translateY(-4px); box-shadow: 0 8px 40px rgba(0,0,0,0.12); }
+    .dresscode-icon { font-size: 48px; margin-bottom: 16px; display: block; }
+    .dresscode-card h3 {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--stone-darker);
+      margin-bottom: 12px;
+    }
+    .dresscode-card p {
+      font-family: var(--font-sans);
+      font-size: 13px;
+      color: var(--text-soft);
+      line-height: 1.7;
+    }
+    .dresscode-avoid {
+      margin-top: 32px;
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 24px 32px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      border-left: 3px solid var(--gold);
+    }
+    .dresscode-avoid-icon { font-size: 28px; flex-shrink: 0; margin-top: 2px; }
+    .dresscode-avoid p {
+      font-family: var(--font-sans);
+      font-size: 13px;
+      color: var(--text-soft);
+      line-height: 1.7;
+    }
+    .dresscode-avoid strong { color: var(--text-main); font-weight: 500; }
+
+    /* ============================================================
+       FAQs IMPROVEMENTS
+    ============================================================ */
+    .faq-list { margin-top: 40px; display: flex; flex-direction: column; gap: 12px; }
+    .faq-section-title {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--stone-darker);
+      padding: 16px 0 8px;
+      border-bottom: 2px solid var(--gold-light);
+      margin-bottom: 12px;
+    }
+    .faq-item {
+      background: var(--white);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    }
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 20px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      text-align: left;
+      gap: 16px;
+    }
+    .faq-question:hover { background: var(--cream-dark); }
+    .faq-question-text {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--stone-darker);
+      flex: 1;
+    }
+    .faq-icon {
+      font-size: 20px;
+      color: var(--gold);
+      flex-shrink: 0;
+      transition: var(--transition);
+      font-style: normal;
+    }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-answer {
+      display: none;
+      padding: 0 24px 20px;
+      font-family: var(--font-sans);
+      font-size: 14px;
+      color: var(--text-soft);
+      line-height: 1.7;
+      border-top: 1px solid var(--cream-dark);
+      padding-top: 16px;
+    }
+    .faq-item.open .faq-answer { display: block; }
+    .faq-answer a { color: var(--gold); text-decoration: none; transition: var(--transition); }
+    .faq-answer a:hover { text-decoration: underline; }
 
   </style>
 </head>
@@ -2061,10 +2183,206 @@
     <div class="section-inner">
       <p class="section-label" data-i18n="nav-regalos">Regals</p>
       <h2 class="section-title" data-i18n="regalos-title">Llista de regals</h2>
+      <p class="section-subtitle">La vostra presència ja és el millor regal. Però si voleu contribuir, aquí teniu algunes idees...</p>
       <div class="divider"></div>
-      <div class="placeholder-box">🎁 Llista de regals Ko-fi — Fase 6</div>
+
+      <!-- Intro card -->
+      <div class="regalos-intro-card">
+        <span class="regalos-intro-icon">🎁</span>
+        <div>
+          <p class="regalos-intro-title">Com funciona?</p>
+          <p class="regalos-intro-desc">Podeu contribuir a qualsevol regal via Bizum, transferència bancària o en efectiu. Si ja heu fet el pagament, aviseu-nos i actualitzarem la barra manualment. Cada euro compta i cada somriure també! 💛</p>
+        </div>
+      </div>
+
+      <!-- Payment methods -->
+      <div class="regalos-payment-methods">
+        <div class="regalos-payment-item">
+          <span class="regalos-payment-icon">📱</span>
+          <div>
+            <strong>Bizum</strong>
+            <span>Número: <b>6XX XXX XXX</b></span>
+          </div>
+        </div>
+        <div class="regalos-payment-item">
+          <span class="regalos-payment-icon">🏦</span>
+          <div>
+            <strong>Transferència</strong>
+            <span>IBAN: <b>ES00 0000 0000 0000 0000 0000</b></span>
+          </div>
+        </div>
+        <div class="regalos-payment-item">
+          <span class="regalos-payment-icon">💵</span>
+          <div>
+            <strong>Efectiu</strong>
+            <span>El dia del casament o avisa'ns</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gift cards grid -->
+      <div class="regalos-grid">
+
+        <!-- REGAL 1 — Vestit del nuvi -->
+        <div class="regalo-card" data-target="1000" data-current="0" data-id="vestit-nuvi">
+          <div class="regalo-img-wrap">
+            <img src="https://placehold.co/400x300/5C4D3C/E8D5B0?text=🤵+Vestit+del+Nuvi" alt="Vestit del nuvi" class="regalo-img" />
+          </div>
+          <div class="regalo-body">
+            <div class="regalo-emoji">🤵</div>
+            <h3 class="regalo-name">El Vestit del Nuvi</h3>
+            <p class="regalo-desc">Perquè el Jordi vagi impecable el gran dia. Traje a mida, corbata de seda i les sabates que portarà fins a la pista de ball. El nuvi més elegant de Lleida.</p>
+            <div class="regalo-meta">
+              <span class="regalo-price">Objectiu: 1.000€</span>
+              <span class="regalo-tag">Elegància</span>
+            </div>
+            <div class="regalo-progress-wrap">
+              <div class="regalo-progress-bar" id="bar-vestit-nuvi"></div>
+            </div>
+            <div class="regalo-progress-label"><span id="pct-vestit-nuvi">0%</span> — <span id="amt-vestit-nuvi">0€</span> de 1.000€</div>
+            <button class="btn btn-primary regalo-btn" onclick="openContrib('vestit-nuvi','El Vestit del Nuvi',1000,0)">Contribuir 💛</button>
+          </div>
+        </div>
+
+        <!-- REGAL 2 — Vestit de la nuvia -->
+        <div class="regalo-card" data-target="2000" data-current="0" data-id="vestit-nuvia">
+          <div class="regalo-img-wrap">
+            <img src="https://placehold.co/400x300/FAF7F2/8B7355?text=👰+Vestit+de+la+Núvia" alt="Vestit de la nuvia" class="regalo-img" />
+          </div>
+          <div class="regalo-body">
+            <div class="regalo-emoji">👰</div>
+            <h3 class="regalo-name">El Vestit de la Núvia</h3>
+            <p class="regalo-desc">El vestit més important de la vida de la Caterina. Cada punt de costura, cada metre de tela, cada llàgrima d'emoció. Ajudeu-nos a fer-lo realitat.</p>
+            <div class="regalo-meta">
+              <span class="regalo-price">Objectiu: 2.000€</span>
+              <span class="regalo-tag">⭐ Especial</span>
+            </div>
+            <div class="regalo-progress-wrap">
+              <div class="regalo-progress-bar" id="bar-vestit-nuvia"></div>
+            </div>
+            <div class="regalo-progress-label"><span id="pct-vestit-nuvia">0%</span> — <span id="amt-vestit-nuvia">0€</span> de 2.000€</div>
+            <button class="btn btn-primary regalo-btn" onclick="openContrib('vestit-nuvia','El Vestit de la Núvia',2000,0)">Contribuir 💛</button>
+          </div>
+        </div>
+
+        <!-- REGAL 3 — Look del Cesc (ESGOTAT) -->
+        <div class="regalo-card agotado" data-target="300" data-current="300" data-id="look-cesc">
+          <div class="regalo-badge-agotado">✓ Esgotat!</div>
+          <div class="regalo-img-wrap">
+            <img src="https://placehold.co/400x300/F0EAE0/8B7355?text=👔+Look+del+Cesc" alt="Look del Cesc" class="regalo-img" />
+          </div>
+          <div class="regalo-body">
+            <div class="regalo-emoji">👔</div>
+            <h3 class="regalo-name">El Look de Gala d'en Cesc</h3>
+            <p class="regalo-desc">Vestir el nostre fill com el cavaller més petit i elegant de la festa. Inclou: vestit de nen, pajarita i una foto que guardareu tota la vida. Ja cobert! 🙏</p>
+            <div class="regalo-meta">
+              <span class="regalo-price">Objectiu: 300€</span>
+              <span class="regalo-tag">Esgotat 💚</span>
+            </div>
+            <div class="regalo-progress-wrap">
+              <div class="regalo-progress-bar" id="bar-look-cesc" style="width:100%"></div>
+            </div>
+            <div class="regalo-progress-label">100% — Completat! Gràcies 💚</div>
+            <button class="btn btn-outline regalo-btn" disabled style="opacity:0.45;cursor:not-allowed;margin-top:12px;">Esgotat</button>
+          </div>
+        </div>
+
+        <!-- REGAL 4 — La Lluna de Mel -->
+        <div class="regalo-card" data-target="4000" data-current="0" data-id="luna-miel">
+          <div class="regalo-img-wrap">
+            <img src="https://placehold.co/400x300/A8B5A0/FFFFFF?text=🌴+Sri+Lanka+%26+Maldives" alt="Lluna de mel" class="regalo-img" />
+          </div>
+          <div class="regalo-body">
+            <div class="regalo-emoji">🌴</div>
+            <h3 class="regalo-name">La Lluna de Mel</h3>
+            <p class="regalo-desc">Sri Lanka + Maldives. Elefants, curri, platges de somni i bungalows sobre l'aigua. Cada euro ens acosta a una posta de sol perfecta. Ajudeu-nos a fer el viatge de la nostra vida!</p>
+            <div class="regalo-meta">
+              <span class="regalo-price">Objectiu: 4.000€</span>
+              <span class="regalo-tag">🏆 Somni</span>
+            </div>
+            <div class="regalo-progress-wrap">
+              <div class="regalo-progress-bar" id="bar-luna-miel"></div>
+            </div>
+            <div class="regalo-progress-label"><span id="pct-luna-miel">0%</span> — <span id="amt-luna-miel">0€</span> de 4.000€</div>
+            <button class="btn btn-primary regalo-btn" onclick="openContrib('luna-miel','La Lluna de Mel',4000,0)">Contribuir 💛</button>
+          </div>
+        </div>
+
+        <!-- REGAL 5 — Habitació del Cesc -->
+        <div class="regalo-card" data-target="3000" data-current="0" data-id="hab-cesc">
+          <div class="regalo-img-wrap">
+            <img src="https://placehold.co/400x300/C8B89A/5C4D3C?text=🛏️+Habitació+del+Cesc" alt="Habitació del Cesc" class="regalo-img" />
+          </div>
+          <div class="regalo-body">
+            <div class="regalo-emoji">🛏️</div>
+            <h3 class="regalo-name">L'Habitació del Cesc</h3>
+            <p class="regalo-desc">El Cesc mereix la seva pròpia habitació de somni. Pintura, mobles, joguines i tot el que necessita el cavaller de la casa. Ajudeu-nos a crear el seu racó màgic!</p>
+            <div class="regalo-meta">
+              <span class="regalo-price">Objectiu: 3.000€</span>
+              <span class="regalo-tag">Familiar</span>
+            </div>
+            <div class="regalo-progress-wrap">
+              <div class="regalo-progress-bar" id="bar-hab-cesc"></div>
+            </div>
+            <div class="regalo-progress-label"><span id="pct-hab-cesc">0%</span> — <span id="amt-hab-cesc">0€</span> de 3.000€</div>
+            <button class="btn btn-primary regalo-btn" onclick="openContrib('hab-cesc','L\'Habitació del Cesc',3000,0)">Contribuir 💛</button>
+          </div>
+        </div>
+
+        <!-- REGAL 6 — Placeholder -->
+        <div class="regalo-card regalo-placeholder-card">
+          <div class="regalo-img-wrap" style="background:var(--cream-dark);display:flex;align-items:center;justify-content:center;">
+            <span style="font-size:56px;opacity:0.35;">🎁</span>
+          </div>
+          <div class="regalo-body" style="align-items:center;text-align:center;">
+            <div class="regalo-emoji" style="opacity:0.4;">✨</div>
+            <h3 class="regalo-name" style="color:var(--text-lighter);">Aviat...</h3>
+            <p class="regalo-desc" style="color:var(--text-lighter);font-style:italic;">Estem preparant una sorpresa més. Torna aviat per descobrir-la!</p>
+            <div class="regalo-progress-wrap" style="opacity:0.25;">
+              <div class="regalo-progress-bar" style="width:0%"></div>
+            </div>
+            <button class="btn btn-outline regalo-btn" disabled style="opacity:0.3;cursor:not-allowed;margin-top:12px;">Pròximament</button>
+          </div>
+        </div>
+
+      </div><!-- /.regalos-grid -->
+
+      <!-- Manual contribution note -->
+      <div class="regalos-manual-note">
+        <span class="regalos-manual-icon">✏️</span>
+        <p><strong>Has fet una transferència, Bizum o donat en efectiu?</strong> Escriu-nos un missatge i nosaltres actualitzarem la barra manualment. Cap aportació queda sense reconèixer! 🙏</p>
+        <a href="mailto:jordi.caterina@casament.cat" class="btn btn-outline" style="flex-shrink:0;font-size:10px;padding:10px 20px;">Avisar-nos</a>
+      </div>
+
     </div>
   </section>
+
+  <!-- Modal contribució -->
+  <div id="contribModal" class="contrib-modal-overlay" onclick="closeContrib(event)">
+    <div class="contrib-modal">
+      <button class="contrib-modal-close" onclick="closeContribDirect()">✕</button>
+      <div class="contrib-modal-emoji">💛</div>
+      <h3 class="contrib-modal-title" id="modalTitle">Contribuir</h3>
+      <p class="contrib-modal-desc">Quant vols aportar?</p>
+      <div class="contrib-amount-grid">
+        <button class="contrib-amount-btn" onclick="setAmount(200)">200€</button>
+        <button class="contrib-amount-btn" onclick="setAmount(300)">300€</button>
+        <button class="contrib-amount-btn" onclick="setAmount(400)">400€</button>
+        <button class="contrib-amount-btn" onclick="setAmount(500)">500€</button>
+        <button class="contrib-amount-btn" onclick="setAmount(750)">750€</button>
+        <button class="contrib-amount-btn" onclick="setAmount(1000)">1.000€</button>
+      </div>
+      <div class="contrib-custom-wrap">
+        <input type="number" id="contribAmount" placeholder="Altre import (€)" min="1" class="contrib-custom-input" />
+      </div>
+      <div class="contrib-methods">
+        <button class="contrib-method-btn" onclick="payBizum()">📱 Bizum — 6XX XXX XXX</button>
+        <button class="contrib-method-btn" onclick="payTransfer()">🏦 Transferència bancària</button>
+        <button class="contrib-method-btn" style="background:var(--sage);" onclick="payEfectiu()">💵 Ho donaré en efectiu</button>
+      </div>
+      <p class="contrib-manual-hint">Sense comissions. Un cop fet el pagament, avisa'ns i actualitzem la barra! 🙏</p>
+    </div>
+  </div>
 
   <!-- ============================================================
        DRESS CODE PLACEHOLDER
@@ -2073,8 +2391,43 @@
     <div class="section-inner">
       <p class="section-label" data-i18n="nav-dresscode">Dress Code</p>
       <h2 class="section-title" data-i18n="dresscode-title">Dress Code</h2>
+      <p class="section-subtitle">Elegant i amb ganes de festa!</p>
       <div class="divider"></div>
-      <div class="placeholder-box">👗 Dress Code — Fase 7</div>
+
+      <div class="dresscode-intro">
+        <p>Volem que us veieu guapíssims, però sobretot que estigueu còmodes per gaudir del gran dia i donar-ho tot a la pista de ball.</p>
+      </div>
+
+      <div class="dresscode-grid">
+        <!-- ELLS -->
+        <div class="dresscode-card">
+          <div class="dresscode-icon">🤵</div>
+          <h3>Ells</h3>
+          <p><strong>Vestit complet (traje).</strong> La corbata o pajarita és totalment opcional, veniu com us sentiu més vosaltres mateixos.</p>
+        </div>
+
+        <!-- ELLES -->
+        <div class="dresscode-card">
+          <div class="dresscode-icon">👗</div>
+          <h3>Elles</h3>
+          <p><strong>Vestit llarg, midi o vestit de jaqueta elegant.</strong> El setembre a Lleida el clima sol ser fantàstic, però quan es pongui el sol pot refrescar un xic, així que una jaqueteta o xal mai està de més.</p>
+        </div>
+
+        <!-- NENS -->
+        <div class="dresscode-card">
+          <div class="dresscode-icon">👶</div>
+          <h3>Nens</h3>
+          <p><strong>Vestit elegant.</strong> En Cesc anirà de gala, així que els seus companys de joc també! Còmodes però guapos.</p>
+        </div>
+      </div>
+
+      <div class="dresscode-avoid">
+        <div class="dresscode-avoid-icon">⚠️</div>
+        <div>
+          <p><strong>Un petit apunt:</strong> El blanc, l'evori i els tons massa clars els reservem exclusivament per a la núvia (i el "look de gala" d'en Cesc, si no es taca amb el dinar!).</p>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -2098,7 +2451,105 @@
       <p class="section-label" data-i18n="nav-faqs">FAQs</p>
       <h2 class="section-title" data-i18n="faqs-title">Preguntes freqüents</h2>
       <div class="divider"></div>
-      <div class="placeholder-box">❓ FAQs — Fase 7</div>
+
+      <div class="faq-list">
+
+        <!-- LOGÍSTICA I HORARIS -->
+        <div class="faq-section-title">📍 Logística i Horaris</div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span class="faq-question-text">A quina hora he d'arribar?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>La cerimònia començarà puntualment a les <strong>12:30</strong>. Us recomanem arribar uns 20-30 minuts abans per poder seure tranquils i saludar-vos. L'entrada és a les portes de la Seu Vella.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span class="faq-question-text">Com arribo al lloc i on puc aparcar?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p><strong>La Boscana</strong> (on serà el banquet) disposa d'un pàrquing privat i gratuït molt ampli per a tots els que veniu amb cotxe.</p>
+            <p style="margin-top:12px;"><strong>Google Maps:</strong> <a href="#" style="color:var(--gold);text-decoration:none;">Veure ubicació a Google Maps</a></p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span class="faq-question-text">Hi haurà servei d'autobús?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Sí! Volem que gaudiu de la barra lliure sense preocupar-vos del cotxe. Hi haurà un servei d'autocar amb sortida des del centre de Lleida i diferents horaris de tornada a la nit.</p>
+            <p style="margin-top:12px;">Quan ompliu el formulari de confirmació (RSVP), us demanarem que ens confirmeu qui necessitarà plaça.</p>
+          </div>
+        </div>
+
+        <!-- MENJAR I ALLOTJAMENT -->
+        <div class="faq-section-title" style="margin-top:32px;">🍽️ Menjar i Allotjament</div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span class="faq-question-text">Sóc celíac, vegetarià o tinc alguna al·lèrgia, què faig?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>No patim gens, us cuidarem com cal. Quan ompliu el formulari de confirmació a la web, trobareu un apartat específic per indicar qualsevol intolerància, al·lèrgia o dieta especial per poder adaptar el vostre menú.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span class="faq-question-text">Venim de fora, on ens podem allotjar?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Estem gestionant bloquejos d'habitacions i preus especials en un parell d'hotels a Lleida per fer-ho més fàcil. Trobareu tota la informació detallada a la secció d'"<strong>Allotjament</strong>" d'aquesta mateixa web.</p>
+          </div>
+        </div>
+
+        <!-- REGALS I ALTRES -->
+        <div class="faq-section-title" style="margin-top:32px;">🎁 Regals i Altres</div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span class="faq-question-text">Puc portar nens a la boda?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>En Cesc necessita companys de joc, així que els nens són benvinguts! Tot i així, si preferiu venir a gaudir de la festa de "solters" i tenir una nit de cita lliure de bolquers, ho entenem perfectament.</p>
+            <p style="margin-top:12px;">Només confirmeu-nos qui vindrà per preveure els menús infantils i l'espai.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span class="faq-question-text">Teniu llista de bodas o compte bancari?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>La vostra presència és el millor regal. Però si ens voleu ajudar a començar aquesta nova etapa, finançar la lluna de mel o posar un granet de sorra en els nostres projectes familiars, hem preparat una <strong>Llista de Regals molt especial</strong> en aquesta mateixa web on podeu triar quina experiència us fa més il·lusió regalar-nos.</p>
+            <p style="margin-top:12px;"><a href="#regalos" style="color:var(--gold);text-decoration:none;font-weight:500;">➜ Anar a la Llista de Regals</a></p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span class="faq-question-text">Fins quan puc confirmar la meva assistència?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Per poder tancar tota la logística amb el catering, us agrairem de tot cor que ens confirmeu la vostra assistència <strong>abans del 30 de juny de 2027</strong> a través de l'apartat "<strong>Confirmar assistència</strong>" d'aquesta web.</p>
+            <p style="margin-top:12px;"><a href="#rsvp" style="color:var(--gold);text-decoration:none;font-weight:500;">➜ Anar al formulari RSVP</a></p>
+          </div>
+        </div>
+
+      </div><!-- /.faq-list -->
+
     </div>
   </section>
 
@@ -2790,87 +3241,11 @@
       initMarkers(lang);
     };
   
-    // ── Llista de Regals ────────────────────────────────────────
-    let currentGift = null;
-
-    function openContrib(id, name, target, current) {
-      currentGift = { id, name, target, current };
-      document.getElementById('modalTitle').textContent = name;
-      document.getElementById('contribAmount').value = '';
-      document.querySelectorAll('.contrib-amount-btn').forEach(b => b.classList.remove('selected'));
-      document.getElementById('contribModal').classList.add('open');
-      document.body.style.overflow = 'hidden';
+    // ── FAQs Toggle ─────────────────────────────────────────────
+    function toggleFaq(button) {
+      const item = button.closest('.faq-item');
+      item.classList.toggle('open');
     }
-
-    function closeContrib(e) {
-      if (e.target === document.getElementById('contribModal')) closeContribDirect();
-    }
-
-    function closeContribDirect() {
-      document.getElementById('contribModal').classList.remove('open');
-      document.body.style.overflow = '';
-    }
-
-    function setAmount(val) {
-      document.getElementById('contribAmount').value = val;
-      document.querySelectorAll('.contrib-amount-btn').forEach(b => {
-        b.classList.toggle('selected', parseInt(b.textContent.replace('.','')) === val);
-      });
-    }
-
-    function getAmount() {
-      const v = parseInt(document.getElementById('contribAmount').value);
-      return isNaN(v) || v < 1 ? null : v;
-    }
-
-    function payBizum() {
-      const amt = getAmount();
-      if (!amt) { alert('Si us plau, indica un import primer.'); return; }
-      alert('📱 BIZUM\n\nNúmero: 6XX XXX XXX\nImport: ' + amt + '€\nConcepte: Regal - ' + currentGift.name + '\n\n✅ Un cop fet, avisa\'ns per actualitzar la barra!\n(Sense comissions)');
-      closeContribDirect();
-    }
-
-    function payTransfer() {
-      const amt = getAmount();
-      if (!amt) { alert('Si us plau, indica un import primer.'); return; }
-      alert('🏦 TRANSFERÈNCIA BANCÀRIA\n\nIBAN: ES00 0000 0000 0000 0000 0000\nTitular: Jordi / Caterina\nImport: ' + amt + '€\nConcepte: Regal - ' + currentGift.name + '\n\n✅ Un cop fet, avisa\'ns per actualitzar la barra!\n(Sense comissions)');
-      closeContribDirect();
-    }
-
-    function payEfectiu() {
-      const amt = getAmount();
-      if (!amt) { alert('Si us plau, indica un import primer.'); return; }
-      alert('💵 EFECTIU\n\nPerfecte! Pots donar-nos ' + amt + '€ en efectiu el dia del casament o quan ens vegem.\n\nAvisa\'ns i ho apuntarem! 🙏');
-      closeContribDirect();
-    }
-
-    // Animate progress bars on scroll
-    const progressObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.querySelectorAll('.regalo-card:not(.agotado)').forEach(card => {
-            const target = parseInt(card.dataset.target) || 0;
-            const current = parseInt(card.dataset.current) || 0;
-            const id = card.dataset.id;
-            if (!id || target === 0) return;
-            const pct = Math.min(100, Math.round((current / target) * 100));
-            const bar = document.getElementById('bar-' + id);
-            if (bar) setTimeout(() => { bar.style.width = pct + '%'; }, 300);
-            const pctEl = document.getElementById('pct-' + id);
-            if (pctEl) pctEl.textContent = pct + '%';
-            const amtEl = document.getElementById('amt-' + id);
-            if (amtEl) amtEl.textContent = current.toLocaleString('ca') + '€';
-          });
-        }
-      });
-    }, { threshold: 0.2 });
-
-    const regalosSection = document.getElementById('regalos');
-    if (regalosSection) progressObserver.observe(regalosSection);
-
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') closeContribDirect();
-    });
 
   </script>
 
