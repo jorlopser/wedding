@@ -1379,6 +1379,318 @@
       }
     }
 
+  
+    /* ============================================================
+       LLISTA DE REGALS
+    ============================================================ */
+    .regalos-intro-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      background: var(--cream-dark);
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      margin-bottom: 32px;
+      border-left: 3px solid var(--gold);
+    }
+    .regalos-intro-icon { font-size: 36px; flex-shrink: 0; }
+    .regalos-intro-title {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--stone-darker);
+      margin-bottom: 6px;
+    }
+    .regalos-intro-desc {
+      font-family: var(--font-sans);
+      font-size: 13px;
+      color: var(--text-soft);
+      line-height: 1.7;
+    }
+    .regalos-payment-methods {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+    .regalos-payment-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--white);
+      border: 1.5px solid var(--gold-light);
+      border-radius: 12px;
+      padding: 14px 20px;
+      flex: 1;
+      min-width: 180px;
+    }
+    .regalos-payment-icon { font-size: 24px; }
+    .regalos-payment-item strong {
+      display: block;
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--stone-darker);
+    }
+    .regalos-payment-item span {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+    .regalos-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+    @media (max-width: 900px) { .regalos-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 580px) { .regalos-grid { grid-template-columns: 1fr; } }
+    .regalo-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: var(--transition);
+    }
+    .regalo-card:hover { transform: translateY(-4px); box-shadow: 0 8px 40px rgba(0,0,0,0.12); }
+    .regalo-card.agotado { opacity: 0.78; }
+    .regalo-card.agotado:hover { transform: none; }
+    .regalo-badge-agotado {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: var(--stone-darker);
+      color: var(--cream);
+      font-family: var(--font-sans);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 20px;
+      z-index: 2;
+    }
+    .regalo-img-wrap {
+      width: 100%;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      background: var(--cream-dark);
+    }
+    .regalo-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+    .regalo-card:hover .regalo-img { transform: scale(1.04); }
+    .regalo-body {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .regalo-emoji { font-size: 28px; margin-bottom: 8px; }
+    .regalo-name {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--stone-darker);
+      margin-bottom: 8px;
+    }
+    .regalo-desc {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      color: var(--text-soft);
+      line-height: 1.6;
+      margin-bottom: 16px;
+      flex: 1;
+    }
+    .regalo-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    .regalo-price {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--stone-darker);
+    }
+    .regalo-tag {
+      font-family: var(--font-sans);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      background: var(--gold-light);
+      color: var(--stone-darker);
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+    .regalo-progress-wrap {
+      width: 100%;
+      height: 8px;
+      background: var(--cream-dark);
+      border-radius: 99px;
+      overflow: hidden;
+      margin-bottom: 6px;
+    }
+    .regalo-progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--gold-light), var(--gold));
+      border-radius: 99px;
+      transition: width 1.2s ease;
+    }
+    .regalo-card.agotado .regalo-progress-bar {
+      background: linear-gradient(90deg, #a8d5a0, #6aab60);
+      width: 100% !important;
+    }
+    .regalo-progress-label {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      color: var(--text-lighter);
+      margin-bottom: 16px;
+    }
+    .regalo-btn { width: 100%; text-align: center; }
+    .regalos-manual-note {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background: var(--cream-dark);
+      border-radius: var(--radius);
+      padding: 24px 32px;
+      flex-wrap: wrap;
+    }
+    .regalos-manual-icon { font-size: 28px; flex-shrink: 0; }
+    .regalos-manual-note p {
+      font-family: var(--font-sans);
+      font-size: 13px;
+      color: var(--text-soft);
+      line-height: 1.6;
+      flex: 1;
+      min-width: 200px;
+    }
+    /* Modal */
+    .contrib-modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.52);
+      backdrop-filter: blur(4px);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+    }
+    .contrib-modal-overlay.open { display: flex; }
+    .contrib-modal {
+      background: var(--white);
+      border-radius: 24px;
+      padding: 40px 36px;
+      max-width: 440px;
+      width: 92%;
+      position: relative;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.22);
+    }
+    .contrib-modal-close {
+      position: absolute;
+      top: 16px; right: 16px;
+      background: var(--cream-dark);
+      border: none;
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 14px;
+      color: var(--text-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+    .contrib-modal-close:hover { background: var(--gold); color: var(--white); }
+    .contrib-modal-emoji { font-size: 48px; margin-bottom: 12px; }
+    .contrib-modal-title {
+      font-family: var(--font-serif);
+      font-size: 26px;
+      font-weight: 400;
+      color: var(--stone-darker);
+      margin-bottom: 6px;
+    }
+    .contrib-modal-desc {
+      font-family: var(--font-sans);
+      font-size: 13px;
+      color: var(--text-soft);
+      margin-bottom: 24px;
+    }
+    .contrib-amount-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .contrib-amount-btn {
+      background: var(--cream-dark);
+      border: 1.5px solid var(--gold-light);
+      border-radius: 8px;
+      padding: 10px 4px;
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--stone-darker);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .contrib-amount-btn:hover, .contrib-amount-btn.selected {
+      background: var(--gold); border-color: var(--gold); color: var(--white);
+    }
+    .contrib-custom-wrap { margin-bottom: 24px; }
+    .contrib-custom-input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1.5px solid var(--gold-light);
+      border-radius: 10px;
+      background: var(--cream);
+      font-family: var(--font-sans);
+      font-size: 14px;
+      color: var(--text-main);
+      text-align: center;
+      outline: none;
+      transition: var(--transition);
+    }
+    .contrib-custom-input:focus { border-color: var(--gold); background: var(--white); }
+    .contrib-methods {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .contrib-method-btn {
+      background: var(--gold);
+      color: var(--white);
+      border: none;
+      border-radius: 40px;
+      padding: 14px 24px;
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .contrib-method-btn:hover { filter: brightness(0.9); }
+    .contrib-manual-hint {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      color: var(--text-lighter);
+      line-height: 1.6;
+    }
+
   </style>
 </head>
 <body>
@@ -2477,6 +2789,89 @@
       _origSetLang(lang);
       initMarkers(lang);
     };
+  
+    // ── Llista de Regals ────────────────────────────────────────
+    let currentGift = null;
+
+    function openContrib(id, name, target, current) {
+      currentGift = { id, name, target, current };
+      document.getElementById('modalTitle').textContent = name;
+      document.getElementById('contribAmount').value = '';
+      document.querySelectorAll('.contrib-amount-btn').forEach(b => b.classList.remove('selected'));
+      document.getElementById('contribModal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeContrib(e) {
+      if (e.target === document.getElementById('contribModal')) closeContribDirect();
+    }
+
+    function closeContribDirect() {
+      document.getElementById('contribModal').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function setAmount(val) {
+      document.getElementById('contribAmount').value = val;
+      document.querySelectorAll('.contrib-amount-btn').forEach(b => {
+        b.classList.toggle('selected', parseInt(b.textContent.replace('.','')) === val);
+      });
+    }
+
+    function getAmount() {
+      const v = parseInt(document.getElementById('contribAmount').value);
+      return isNaN(v) || v < 1 ? null : v;
+    }
+
+    function payBizum() {
+      const amt = getAmount();
+      if (!amt) { alert('Si us plau, indica un import primer.'); return; }
+      alert('📱 BIZUM\n\nNúmero: 6XX XXX XXX\nImport: ' + amt + '€\nConcepte: Regal - ' + currentGift.name + '\n\n✅ Un cop fet, avisa\'ns per actualitzar la barra!\n(Sense comissions)');
+      closeContribDirect();
+    }
+
+    function payTransfer() {
+      const amt = getAmount();
+      if (!amt) { alert('Si us plau, indica un import primer.'); return; }
+      alert('🏦 TRANSFERÈNCIA BANCÀRIA\n\nIBAN: ES00 0000 0000 0000 0000 0000\nTitular: Jordi / Caterina\nImport: ' + amt + '€\nConcepte: Regal - ' + currentGift.name + '\n\n✅ Un cop fet, avisa\'ns per actualitzar la barra!\n(Sense comissions)');
+      closeContribDirect();
+    }
+
+    function payEfectiu() {
+      const amt = getAmount();
+      if (!amt) { alert('Si us plau, indica un import primer.'); return; }
+      alert('💵 EFECTIU\n\nPerfecte! Pots donar-nos ' + amt + '€ en efectiu el dia del casament o quan ens vegem.\n\nAvisa\'ns i ho apuntarem! 🙏');
+      closeContribDirect();
+    }
+
+    // Animate progress bars on scroll
+    const progressObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.querySelectorAll('.regalo-card:not(.agotado)').forEach(card => {
+            const target = parseInt(card.dataset.target) || 0;
+            const current = parseInt(card.dataset.current) || 0;
+            const id = card.dataset.id;
+            if (!id || target === 0) return;
+            const pct = Math.min(100, Math.round((current / target) * 100));
+            const bar = document.getElementById('bar-' + id);
+            if (bar) setTimeout(() => { bar.style.width = pct + '%'; }, 300);
+            const pctEl = document.getElementById('pct-' + id);
+            if (pctEl) pctEl.textContent = pct + '%';
+            const amtEl = document.getElementById('amt-' + id);
+            if (amtEl) amtEl.textContent = current.toLocaleString('ca') + '€';
+          });
+        }
+      });
+    }, { threshold: 0.2 });
+
+    const regalosSection = document.getElementById('regalos');
+    if (regalosSection) progressObserver.observe(regalosSection);
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeContribDirect();
+    });
+
   </script>
 
 </body>
