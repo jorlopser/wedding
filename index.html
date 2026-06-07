@@ -2175,88 +2175,83 @@
   <section id="agenda">
     <div class="section-inner">
       <p class="section-label" data-i18n="nav-agenda">Agenda</p>
-      <h2 class="section-title" data-i18n="agenda-title">El gran dia</h2>
-      <p class="section-subtitle" data-i18n="agenda-subtitle">25 de setembre de 2027 · Lleida</p>
+      <h2 class="section-title" data-i18n="agenda-title">La nostra celebració</h2>
+      <p class="section-subtitle" data-i18n="agenda-subtitle">24 &amp; 25 de setembre de 2027 · Lleida</p>
       <div class="divider"></div>
 
-      <div class="agenda-grid">
+      <!-- Franja Pre-boda -->
+      <div style="background:var(--cream-dark); border-radius:var(--radius); padding:36px 40px; margin-bottom:32px; display:flex; gap:40px; align-items:flex-start; flex-wrap:wrap;">
+        <div style="flex:0 0 auto;">
+          <p style="font-family:var(--font-sans);font-size:10px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;">Pre-boda</p>
+          <h3 style="font-family:var(--font-serif);font-size:28px;font-weight:300;color:var(--stone-darker);line-height:1.2;margin-bottom:4px;">Divendres 24 de setembre</h3>
+          <div style="width:40px;height:1px;background:var(--gold);margin-top:12px;"></div>
+        </div>
+        <div style="flex:1;min-width:260px;">
+          <p style="font-family:var(--font-sans);font-size:14px;color:var(--text-soft);line-height:1.8;margin-bottom:16px;">Per als qui vingueu de fora, el divendres és el moment d'arribar i instal·lar-vos amb calma. Hem acordat un preu especial amb l'<strong style="color:var(--text-main);">Hotel X</strong>, al centre de Lleida, perquè tingueu on allotjar-vos ben situat i sense complicacions.</p>
+          <p style="font-family:var(--font-sans);font-size:14px;color:var(--text-soft);line-height:1.8;">A la tarda, organitzarem una visita al <strong style="color:var(--text-main);">Castell del Remei</strong>: una passejada entre vinyes, visita al celler a les <strong style="color:var(--text-main);">18:00</strong> i degustació a les <strong style="color:var(--text-main);">19:30</strong>. Està obert a tothom qui vulgui venir — les places són molt limitades, així que si t'hi vols afegir, fes-nos-ho saber amb antelació!</p>
+        </div>
+      </div>
 
-        <!-- Ceremonia -->
+      <!-- 2 blocs: Cerimònia + Banquet -->
+      <div class="agenda-grid" style="grid-template-columns:1fr 1fr;">
+
+        <!-- Cerimònia -->
         <div class="agenda-block">
           <div class="agenda-block-img">
-            <img src="images/La-Seu-vella-(1).jpg" alt="Seu Vella de Lleida" loading="lazy" />
+            <img src="images/la-seu-vella.jpg" alt="Seu Vella de Lleida" loading="lazy" />
             <div class="agenda-block-img-overlay"></div>
           </div>
           <h3 class="agenda-block-title" data-i18n="agenda-ceremonia-title">Cerimònia</h3>
-          <p class="agenda-block-place">Seu Vella de Lleida</p>
+          <p class="agenda-block-place" style="margin-bottom:6px;">Seu Vella de Lleida</p>
+          <p style="font-family:var(--font-sans);font-size:10px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-lighter);margin-bottom:20px;">Dissabte 25 de setembre</p>
           <div class="agenda-timeline">
             <div class="agenda-item">
+              <span class="agenda-time">11:30</span>
+              <div class="agenda-desc"><strong>Arribada dels convidats</strong></div>
+            </div>
+            <div class="agenda-item">
               <span class="agenda-time">12:00</span>
-              <div class="agenda-desc">
-                <strong data-i18n="agenda-c1-title">Arribada dels convidats</strong>
-                <span data-i18n="agenda-c1-desc">Us esperem a les portes de la Seu Vella</span>
-              </div>
+              <div class="agenda-desc"><strong>Cerimònia civil</strong></div>
             </div>
             <div class="agenda-item">
-              <span class="agenda-time">12:30</span>
-              <div class="agenda-desc">
-                <strong data-i18n="agenda-c2-title">Cerimònia civil</strong>
-                <span data-i18n="agenda-c2-desc">L'enllaç dels nostres cors</span>
-              </div>
-            </div>
-            <div class="agenda-item">
-              <span class="agenda-time">13:30</span>
-              <div class="agenda-desc">
-                <strong data-i18n="agenda-c3-title">Fotos i cava de benvinguda</strong>
-                <span data-i18n="agenda-c3-desc">Moments per recordar</span>
-              </div>
+              <span class="agenda-time">13:00</span>
+              <div class="agenda-desc"><strong>Sortida cap a La Boscana</strong></div>
             </div>
           </div>
           <div class="agenda-address">
-            📍 <span data-i18n="agenda-dir-seu">Carrer dels Cavallers, Lleida</span>
+            📍 <a href="https://maps.google.com/?q=Seu+Vella+de+Lleida" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none;">Carrer dels Cavallers, Lleida · Google Maps</a>
           </div>
         </div>
 
-        <!-- Banquete -->
+        <!-- Banquet -->
         <div class="agenda-block">
           <div class="agenda-block-img">
-            <img src="images/La-Boscana-(1).jpg" alt="La Boscana" loading="lazy" />
+            <img src="images/la-boscana.jpg" alt="La Boscana" loading="lazy" />
             <div class="agenda-block-img-overlay"></div>
           </div>
           <h3 class="agenda-block-title" data-i18n="agenda-banquet-title">Banquet</h3>
-          <p class="agenda-block-place">La Boscana</p>
+          <p class="agenda-block-place" style="margin-bottom:6px;">La Boscana</p>
+          <p style="font-family:var(--font-sans);font-size:10px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-lighter);margin-bottom:20px;">Dissabte 25 de setembre</p>
           <div class="agenda-timeline">
             <div class="agenda-item">
-              <span class="agenda-time">15:00</span>
-              <div class="agenda-desc">
-                <strong data-i18n="agenda-b1-title">Còctel i aperitiu</strong>
-                <span data-i18n="agenda-b1-desc">Als jardins de La Boscana</span>
-              </div>
+              <span class="agenda-time">14:30</span>
+              <div class="agenda-desc"><strong>Còctel i aperitiu</strong></div>
             </div>
             <div class="agenda-item">
               <span class="agenda-time">16:30</span>
-              <div class="agenda-desc">
-                <strong data-i18n="agenda-b2-title">Dinar de noces</strong>
-                <span data-i18n="agenda-b2-desc">Menú degustació amb els nostres éssers estimats</span>
-              </div>
+              <div class="agenda-desc"><strong>Dinar de noces</strong></div>
             </div>
             <div class="agenda-item">
-              <span class="agenda-time">20:00</span>
-              <div class="agenda-desc">
-                <strong data-i18n="agenda-b3-title">Ball i festa</strong>
-                <span data-i18n="agenda-b3-desc">Que comenci la festa!</span>
-              </div>
+              <span class="agenda-time">19:00</span>
+              <div class="agenda-desc"><strong>Inici de la festa</strong></div>
             </div>
             <div class="agenda-item">
               <span class="agenda-time">00:00</span>
-              <div class="agenda-desc">
-                <strong data-i18n="agenda-b4-title">Sorpresa de mitjanit</strong>
-                <span data-i18n="agenda-b4-desc">Us tenim una sorpresa preparada 🎆</span>
-              </div>
+              <div class="agenda-desc"><strong>Cloenda 🎆</strong></div>
             </div>
           </div>
           <div class="agenda-address">
-            📍 <span data-i18n="agenda-dir-boscana">Bellvís, Lleida</span>
+            📍 <a href="https://maps.google.com/?q=La+Boscana+Restaurant,+Bellvis,+Lleida" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none;">Bellvís, Lleida · Google Maps</a>
           </div>
         </div>
 
@@ -2286,7 +2281,7 @@
             <p class="historia-year" data-i18n="historia-y1">El primer encontre</p>
             <h3 class="historia-title-item" data-i18n="historia-t1">Quan ens vam conèixer</h3>
             <div class="divider"></div>
-            <p class="historia-text" data-i18n="historia-d1">Lorem ipsum — aquí explicareu com us vau conèixer. Podeu explicar el lloc, la situació, i aquella primera impressió que mai oblidareu.</p>
+            <p class="historia-text" data-i18n="historia-d1">Ens vam conèixer en un afterwork de Metyis. Aquella nit, entre converses i rialles, va ser l'inici d'una història que no hauríem pogut imaginar.</p>
           </div>
         </div>
 
@@ -2299,7 +2294,7 @@
             <p class="historia-year" data-i18n="historia-y2">El noviatge</p>
             <h3 class="historia-title-item" data-i18n="historia-t2">Els primers anys junts</h3>
             <div class="divider"></div>
-            <p class="historia-text" data-i18n="historia-d2">Lorem ipsum — aquí podeu explicar els moments més especials de la vostra relació, els viatges, les aventures i tot allò que us ha unit.</p>
+            <p class="historia-text" data-i18n="historia-d2">Ben d'hora ens vam aventurar a marxar junts a Suïssa. Una nova vida en un nou país, plegats, que ens va fer créixer i unir com mai.</p>
           </div>
         </div>
 
@@ -2310,9 +2305,9 @@
           </div>
           <div class="historia-item-content">
             <p class="historia-year" data-i18n="historia-y3">La petició</p>
-            <h3 class="historia-title-item" data-i18n="historia-t3">El dia que ho va preguntar</h3>
+            <h3 class="historia-title-item" data-i18n="historia-t3">La petició a Roma</h3>
             <div class="divider"></div>
-            <p class="historia-text" data-i18n="historia-d3">Lorem ipsum — aquí explicareu la història de la petició de mà. On va ser, com va ser, i aquell moment màgic que ho va canviar tot.</p>
+            <p class="historia-text" data-i18n="historia-d3">A Roma, amb el petit Cesc ja en camí, en Jordi va fer la pregunta que ho va canviar tot. Un moment màgic en una ciutat màgica, que mai oblidarem.</p>
           </div>
         </div>
 
@@ -2765,7 +2760,43 @@
       <p class="section-label" data-i18n="nav-alojamiento">Allotjament</p>
       <h2 class="section-title" data-i18n="alojamiento-title">Allotjament i transport</h2>
       <div class="divider"></div>
-      <div class="placeholder-box">🏨 Allotjament i transport — Fase 7</div>
+
+      <!-- Hotel -->
+      <div style="background:var(--cream); border-radius:var(--radius); padding:32px; margin-bottom:24px; border-left:3px solid var(--gold);">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+          <span style="font-size:28px;">🏨</span>
+          <div>
+            <p style="font-family:var(--font-sans);font-size:10px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:4px;">Hotel recomanat</p>
+            <h3 style="font-family:var(--font-serif);font-size:22px;font-weight:400;color:var(--stone-darker);">Hotel X</h3>
+          </div>
+        </div>
+        <p style="font-family:var(--font-sans);font-size:14px;color:var(--text-soft);line-height:1.7;">Sabem que molts de vosaltres veniu de fora de Lleida, i volem que ho tingueu tot a prop. Hem arribat a un acord especial amb l'<strong>Hotel X</strong>, situat al centre de Lleida, perquè pugueu allotjar-vos còmodament i estar a prop de tot. Aviat compartirem els detalls de les tarifes i com fer la reserva.</p>
+      </div>
+
+      <!-- Transport i aparcament -->
+      <div style="background:var(--cream); border-radius:var(--radius); padding:32px; margin-bottom:24px; border-left:3px solid var(--gold);">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+          <span style="font-size:28px;">🚗</span>
+          <div>
+            <p style="font-family:var(--font-sans);font-size:10px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:4px;">Aparcament</p>
+            <h3 style="font-family:var(--font-serif);font-size:22px;font-weight:400;color:var(--stone-darker);">Zones d'aparcament</h3>
+          </div>
+        </div>
+        <p style="font-family:var(--font-sans);font-size:14px;color:var(--text-soft);line-height:1.7;">Hi ha zona d'aparcament disponible tant a la <strong>Seu Vella</strong> com a <strong>La Boscana</strong>. Tingueu en compte que el trasllat entre els dos llocs l'haureu de cobrir vosaltres mateixos. Si algú té alguna dificultat o necessita ajuda per organitzar-se, feu-nos-ho saber i mirarem de trobar una solució junts 🙂</p>
+      </div>
+
+      <!-- Autobusos de tornada -->
+      <div style="background:var(--cream); border-radius:var(--radius); padding:32px; border-left:3px solid var(--gold-light);">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+          <span style="font-size:28px;">🚌</span>
+          <div>
+            <p style="font-family:var(--font-sans);font-size:10px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:4px;">Autobusos de tornada</p>
+            <h3 style="font-family:var(--font-serif);font-size:22px;font-weight:400;color:var(--stone-darker);">Tornada a Lleida o Barcelona</h3>
+          </div>
+        </div>
+        <p style="font-family:var(--font-sans);font-size:14px;color:var(--text-soft);line-height:1.7;">Estem explorant l'opció d'organitzar autobusos de tornada a Lleida i Barcelona al final de la festa. Dependrà de la quantitat de gent interessada, i no ens podem comprometre encara. Si us interessa, feu-nos-ho saber a través del formulari RSVP o contacteu-nos directament. Quants més sigueu, més fàcil serà organitzar-ho! 🙌</p>
+      </div>
+
     </div>
   </section>
 
@@ -2789,34 +2820,23 @@
             <span class="faq-icon">+</span>
           </button>
           <div class="faq-answer">
-            <p>La cerimònia començarà puntualment a les <strong>12:30</strong>. Us recomanem arribar uns 20-30 minuts abans per poder seure tranquils i saludar-vos. L'entrada és a les portes de la Seu Vella.</p>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-question" onclick="toggleFaq(this)">
-            <span class="faq-question-text">Com arribo al lloc i on puc aparcar?</span>
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-answer">
-            <p><strong>La Boscana</strong> (on serà el banquet) disposa d'un pàrquing privat i gratuït molt ampli per a tots els que veniu amb cotxe.</p>
-            <p style="margin-top:12px;"><strong>Google Maps:</strong> <a href="#" style="color:var(--gold);text-decoration:none;">Veure ubicació a Google Maps</a></p>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-question" onclick="toggleFaq(this)">
-            <span class="faq-question-text">Hi haurà servei d'autobús?</span>
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-answer">
-            <p>Sí! Volem que gaudiu de la barra lliure sense preocupar-vos del cotxe. Hi haurà un servei d'autocar amb sortida des del centre de Lleida i diferents horaris de tornada a la nit.</p>
-            <p style="margin-top:12px;">Quan ompliu el formulari de confirmació (RSVP), us demanarem que ens confirmeu qui necessitarà plaça.</p>
+            <p>La cerimònia començarà puntualment a les <strong>12:00</strong>. Us recomanem arribar a les <strong>11:30</strong> per poder seure tranquils i saludar-vos. L'entrada és a les portes de la Seu Vella.</p>
           </div>
         </div>
 
         <!-- MENJAR I ALLOTJAMENT -->
         <div class="faq-section-title" style="margin-top:32px;">🍽️ Menjar i Allotjament</div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span class="faq-question-text">On és La Boscana i com és el menú?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>La Boscana és un restaurant gastronòmic a Bellvís (Lleida), envoltat de natura i reconegut amb una <strong>Estrella Michelin</strong>. El menú és un menú degustació d'alta cuina. El cost per persona és d'aproximadament <strong>200€</strong>, que inclou l'àpat complet amb maridatge. Si teniu qualsevol dubte, no dubteu a preguntar-nos.</p>
+            <p style="margin-top:12px;"><a href="https://www.laboscana.com" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none;font-weight:500;">➜ Conèixer més sobre La Boscana</a></p>
+          </div>
+        </div>
 
         <div class="faq-item">
           <button class="faq-question" onclick="toggleFaq(this)">
@@ -2834,7 +2854,17 @@
             <span class="faq-icon">+</span>
           </button>
           <div class="faq-answer">
-            <p>Estem gestionant bloquejos d'habitacions i preus especials en un parell d'hotels a Lleida per fer-ho més fàcil. Trobareu tota la informació detallada a la secció d'"<strong>Allotjament</strong>" d'aquesta mateixa web.</p>
+            <p>Hem arribat a un acord especial amb l'<strong>Hotel X</strong>, situat al centre de Lleida, perquè pugueu allotjar-vos còmodament i estar a prop de tot. Aviat compartirem els detalls de les tarifes. Trobareu tota la informació a la secció d'<a href="#alojamiento" style="color:var(--gold);text-decoration:none;font-weight:500;">Allotjament</a> d'aquesta mateixa web.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span class="faq-question-text">Què és el Castell del Remei i com funciona la pre-boda?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>El Castell del Remei és un celler emblemàtic de les Garrigues (Lleida), envoltat de vinyes. El divendres 24 de setembre organitzem una visita al celler i una degustació per als familiars i amics més propers. Les places són molt limitades i l'assistència implica assumir el cost individualment. Si us hi voleu afegir, feu-nos-ho saber amb antelació!</p>
           </div>
         </div>
 
@@ -2847,8 +2877,8 @@
             <span class="faq-icon">+</span>
           </button>
           <div class="faq-answer">
-            <p>En Cesc necessita companys de joc, així que els nens són benvinguts! Tot i així, si preferiu venir a gaudir de la festa de "solters" i tenir una nit de cita lliure de bolquers, ho entenem perfectament.</p>
-            <p style="margin-top:12px;">Només confirmeu-nos qui vindrà per preveure els menús infantils i l'espai.</p>
+            <p>En Cesc necessita companys de joc, així que els nens són benvinguts! Pel que fa al servei d'infants, és per a nens a partir de <strong>4 anys</strong> i ha d'haver-hi un mínim aproximat de <strong>4 o 5 nens</strong>. Els cuiden des de l'aperitiu fins que comença la festa; una vegada comença la festa, el servei ja finalitza.</p>
+            <p style="margin-top:12px;">Confirmeu-nos qui vindrà per preveure els menús infantils i l'espai.</p>
           </div>
         </div>
 
@@ -2941,8 +2971,8 @@
         'hero-cta-rsvp':     'Confirmar assistència',
         'hero-cta-agenda':   'Veure agenda',
         'scroll-down':       'Descobreix més',
-        'agenda-title':      'El gran dia',
-        'agenda-subtitle':   '25 de setembre de 2027 · Lleida',
+        'agenda-title':      'La nostra celebració',
+        'agenda-subtitle':   '24 & 25 de setembre de 2027 · Lleida',
         'agenda-ceremonia-title': 'Cerimònia',
         'agenda-banquet-title':   'Banquet',
         'agenda-c1-title':   'Arribada dels convidats',
@@ -2964,13 +2994,13 @@
         'historia-subtitle': 'Tot gran amor té el seu inici',
         'historia-y1':       'El primer encontre',
         'historia-t1':       'Quan ens vam conèixer',
-        'historia-d1':       "Lorem ipsum — aquí explicareu com us vau conèixer. Podeu explicar el lloc, la situació, i aquella primera impressió que mai oblidareu.",
+        'historia-d1':       "Ens vam conèixer en un afterwork de Metyis. Aquella nit, entre converses i rialles, va ser l'inici d'una història que no hauríem pogut imaginar.",
         'historia-y2':       'El noviatge',
         'historia-t2':       'Els primers anys junts',
-        'historia-d2':       "Lorem ipsum — aquí podeu explicar els moments més especials de la vostra relació, els viatges, les aventures i tot allò que us ha unit.",
+        'historia-d2':       "Ben d'hora ens vam aventurar a marxar junts a Suïssa. Una nova vida en un nou país, plegats, que ens va fer créixer i unir com mai.",
         'historia-y3':       'La petició',
-        'historia-t3':       'El dia que ho va preguntar',
-        'historia-d3':       "Lorem ipsum — aquí explicareu la història de la petició de mà. On va ser, com va ser, i aquell moment màgic que ho va canviar tot.",
+        'historia-t3':       'La petició a Roma',
+        'historia-d3':       "A Roma, amb el petit Cesc ja en camí, en Jordi va fer la pregunta que ho va canviar tot. Un moment màgic en una ciutat màgica, que mai oblidarem.",
         'historia-y4':       '25 · 09 · 2027',
         'historia-t4':       'I ara... us convidem a celebrar-ho!',
         'historia-d4':       "Voleu compartir aquest dia tan especial amb les persones que més estimem. Gràcies per ser part de la nostra història.",
@@ -3031,8 +3061,8 @@
         'hero-cta-rsvp':     'Confirmar asistencia',
         'hero-cta-agenda':   'Ver agenda',
         'scroll-down':       'Descubre más',
-        'agenda-title':      'El gran día',
-        'agenda-subtitle':   '25 de septiembre de 2027 · Lleida',
+        'agenda-title':      'La nostra celebració',
+        'agenda-subtitle':   '24 & 25 de septiembre de 2027 · Lleida',
         'agenda-ceremonia-title': 'Ceremonia',
         'agenda-banquet-title':   'Banquete',
         'agenda-c1-title':   'Llegada de los invitados',
@@ -3054,13 +3084,13 @@
         'historia-subtitle': 'Todo gran amor tiene su inicio',
         'historia-y1':       'El primer encuentro',
         'historia-t1':       'Cuando nos conocimos',
-        'historia-d1':       "Lorem ipsum — aquí explicaréis cómo os conocisteis. Podéis contar el lugar, la situación, y esa primera impresión que nunca olvidaréis.",
+        'historia-d1':       "Nos conocimos en un afterwork de Metyis. Aquella noche, entre conversaciones y risas, fue el inicio de una historia que nunca habríamos podido imaginar.",
         'historia-y2':       'El noviazgo',
         'historia-t2':       'Los primeros años juntos',
-        'historia-d2':       "Lorem ipsum — aquí podéis explicar los momentos más especiales de vuestra relación, los viajes, las aventuras y todo lo que os ha unido.",
+        'historia-d2':       "Muy pronto nos aventuramos a irnos juntos a Suiza. Una nueva vida en un nuevo país, juntos, que nos hizo crecer y unirnos como nunca.",
         'historia-y3':       'La petición',
-        'historia-t3':       'El día que lo preguntó',
-        'historia-d3':       "Lorem ipsum — aquí explicaréis la historia de la pedida de mano. Dónde fue, cómo fue, y ese momento mágico que lo cambió todo.",
+        'historia-t3':       'La petición en Roma',
+        'historia-d3':       "En Roma, con el pequeño Cesc ya en camino, Jordi hizo la pregunta que lo cambió todo. Un momento mágico en una ciudad mágica que nunca olvidaremos.",
         'historia-y4':       '25 · 09 · 2027',
         'historia-t4':       '¡Y ahora... os invitamos a celebrarlo!',
         'historia-d4':       "Queremos compartir este día tan especial con las personas que más queremos. Gracias por ser parte de nuestra historia.",
@@ -3121,8 +3151,8 @@
         'hero-cta-rsvp':     'Confirm attendance',
         'hero-cta-agenda':   'View schedule',
         'scroll-down':       'Discover more',
-        'agenda-title':      'The Big Day',
-        'agenda-subtitle':   'September 25th, 2027 · Lleida',
+        'agenda-title':      'Our Celebration',
+        'agenda-subtitle':   'September 24th & 25th, 2027 · Lleida',
         'agenda-ceremonia-title': 'Ceremony',
         'agenda-banquet-title':   'Reception',
         'agenda-c1-title':   'Guests arrival',
@@ -3144,13 +3174,13 @@
         'historia-subtitle': 'Every great love has its beginning',
         'historia-y1':       'The first encounter',
         'historia-t1':       'When we met',
-        'historia-d1':       "Lorem ipsum — here you will tell how you met. You can share the place, the situation, and that first impression you will never forget.",
+        'historia-d1':       "We met at a Metyis afterwork event. That night, amid conversations and laughter, was the beginning of a story we could never have imagined.",
         'historia-y2':       'The relationship',
         'historia-t2':       'Our first years together',
-        'historia-d2':       "Lorem ipsum — here you can share the most special moments of your relationship, the trips, the adventures and everything that has brought you together.",
+        'historia-d2':       "Early on, we ventured to move together to Switzerland. A new life in a new country, side by side, that brought us closer than ever.",
         'historia-y3':       'The proposal',
-        'historia-t3':       'The day he asked',
-        'historia-d3':       "Lorem ipsum — here you will tell the story of the proposal. Where it was, how it happened, and that magical moment that changed everything.",
+        'historia-t3':       'The proposal in Rome',
+        'historia-d3':       "In Rome, with little Cesc already on the way, Jordi asked the question that changed everything. A magical moment in a magical city we will never forget.",
         'historia-y4':       '25 · 09 · 2027',
         'historia-t4':       'And now... we invite you to celebrate!',
         'historia-d4':       "We want to share this special day with the people we love most. Thank you for being part of our story.",
